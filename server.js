@@ -72,9 +72,7 @@ mongoose.connect(URI, {
     if(err) throw err;
     console.log('Connected to mongodb')
 })
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'La aplicación está en modo de despliegue (deploy)' });
-});
+ 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'))
     app.get('*', (req, res) => {
