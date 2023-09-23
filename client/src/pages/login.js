@@ -32,7 +32,7 @@ const Login = () => {
     return (
         <div className="auth_page"style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }}>
             <form onSubmit={handleSubmit}>
-                <h3 className="text-uppercase text-center mb-4">{t('V-Network', { lng: languagee.language })}</h3> 
+                <h3 className="text-uppercase text-center mb-4">Tassili Automobile</h3> 
 
                 <div className="form-group" style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }} >
                     <label htmlFor="exampleInputEmail1"   >{t('Email address', { lng: languagee.language })}</label> 
