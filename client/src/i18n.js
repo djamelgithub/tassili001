@@ -97,7 +97,7 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
         "Loading": "Loading",
 
         "Register": "Register",
-        "V-Network": "Tassili social network",
+      
         "Tassili": "Tassili",
 
         "Already have an account?": "Already have an account?",
@@ -220,7 +220,7 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
 
 
         "Register": "Enregistrer",
-        "V-Network": "Tassili Automobile",
+    
         "Tassili": "Tassili",
 
         "Hide": "Cacher",
@@ -338,7 +338,7 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
         "Loading": "تحميل",
 
         "Register": "تسجيل",
-        "V-Network": "تاسيلي",
+      
         "Tassili": "تاسيلي",
 
         "Hide": "أخفاء",
