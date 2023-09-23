@@ -84,10 +84,10 @@ const LeftSide = () => {
         <>
             <form className="message_header" onSubmit={handleSearch} >
                 <input type="text" value={search}
-                placeholder="Recherche utilizateur..."
+                placeholder="Recherch utilizateur..."
                 onChange={e => setSearch(e.target.value)} />
 
-                <button type="submit" style={{display: 'none'}}>Recherche</button>
+                <button type="submit" style={{display: 'none'}}>Search</button>
             </form>
 
             <div className="message_chat_list">

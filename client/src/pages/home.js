@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import jQuery from 'jquery'
 
 import Avatar from '../components/Avatar';
- 
+
 
 
 
@@ -29,25 +29,25 @@ import { getDataAPI } from '../utils/fetchData';
 
 import Ventaanoautomobile from '../components/ranges/Ventaanoautomobile';
 import Ventaprecioautomobile from '../components/ranges/Ventaprecioautomobile';
- 
+
 import Locacionprecioautomobile from '../components/ranges/Locacionprecioautomobile';
 import { getPosts, POST_TYPES } from '../redux/actions/postAction';
- 
+
 import Kilometrajeautomobile from '../components/ranges/Kilometrajeautomobile';
 
- 
- 
+
+
 import { useSelector, useDispatch } from 'react-redux'
- 
+
 const Home = () => {
-  
+
   const { homePostsReducer, auth, homePostsadminReducer, languagee } = useSelector((state) => state);
- 
+
   const dispatch = useDispatch()
- 
-  
-  
- 
+
+
+
+
 
 
 
@@ -92,7 +92,7 @@ const Home = () => {
 
   const [tipoTransaccion, setTipoTransaccion] = useState('');
   const [showSearchFields, setShowSearchFields] = useState(false);
-  const [ ventaValue, setVentalocation] = useState('');
+  const [ventaValue, setVentalocation] = useState('');
   const [wilayaValue, setWilayaValue] = useState('');
   const [communeValue, setCommuneValue] = useState('');
   const [marcaValue, setMarcaValue] = useState('');
@@ -143,9 +143,9 @@ const Home = () => {
     dispatch(getPosts(auth.token));
   };
 
- 
 
- 
+
+
 
 
   const handleBuscar = async () => {
@@ -232,31 +232,31 @@ const Home = () => {
   const username = auth?.user?.username;
 
 
-  
+
   return (
     <div   >
-           <div className="page-wrapper chiller-theme toggled">
-        
+      <div className="page-wrapper chiller-theme toggled">
+
         <nav id="sidebar" className="sidebar-wrapper">
           <div className="sidebar-content">
 
 
-          <div className="sidebar-brand" style={{ marginBottom: '20px', paddingLeft: '15px', borderBottom: '1px solid #ccc' }}>
-  {auth.user.role === 'admin' || auth.user.role === 'moderador' ? (
-    <Link to="/pages/administracion/automobilesaprove" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-      <i className="fas fa-user-cog" style={{ fontSize: '24px', marginRight: '10px' }}></i>
-      <span style={{ fontSize: '16px' }}>Administration</span>
-    </Link>
-  ) : (
-    <Link to="/" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-      <i className="fas fa-chart-line" style={{ fontSize: '24px', marginRight: '10px' }}></i>
-      <span style={{ fontSize: '20px' }}>Tassili</span>
-    </Link>
-  )}
-  <div id="close-sidebar" style={{ marginLeft: 'auto', paddingRight: '15px', cursor: 'pointer' }}>
-    <i className="fas fa-bars" style={{ color: 'red', fontSize: '1.5rem' }} />
-  </div>
-</div>
+            <div className="sidebar-brand" style={{ marginBottom: '20px', paddingLeft: '15px', borderBottom: '1px solid #ccc' }}>
+              {auth.user.role === 'admin' || auth.user.role === 'moderador' ? (
+                <Link to="/pages/administracion/automobilesaprove" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                  <i className="fas fa-user-cog" style={{ fontSize: '24px', marginRight: '10px' }}></i>
+                  <span style={{ fontSize: '16px' }}>Administration</span>
+                </Link>
+              ) : (
+                <Link to="/" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                  <i className="fas fa-chart-line" style={{ fontSize: '24px', marginRight: '10px' }}></i>
+                  <span style={{ fontSize: '20px' }}>Tassili</span>
+                </Link>
+              )}
+              <div id="close-sidebar" style={{ marginLeft: 'auto', paddingRight: '15px', cursor: 'pointer' }}>
+                <i className="fas fa-bars" style={{ color: 'red', fontSize: '1.5rem' }} />
+              </div>
+            </div>
 
 
 
@@ -289,11 +289,13 @@ const Home = () => {
 
 
             <div className="sidebar-menu">
-              <div className="card" style={{ padding: '10px' }}>
+              <div className="card " style={{  padding: '5px' }}>
 
+ 
                
+  <div id="close-sidebar"  >
                 <Status />
-
+              </div>
 
 
 
@@ -465,7 +467,7 @@ const Home = () => {
 
 
 
-                        <div className="search-container card-body   mb-2 mt-2" style={{  display: 'flex', justifyContent: 'space-between' }}>
+                        <div className="search-container card-body   mb-2 mt-2" style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <button type="button" onClick={handleBuscar} className="btn btn-primary" >
                             Filtre
 
@@ -485,18 +487,18 @@ const Home = () => {
 
                 </form>
                 <div className=' form-control '  >
-                
+
                   <Link to="/message" style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }} className="btn btn-primary  ">
-                  Contacter l'administrateur
+                    Contacter l'administrateur
                   </Link>
                 </div>
 
-                <div className='card mt-2'>
+                <div className='card mt-2 toggled '>
                   {auth.user.role === 'admin' && <Status />}
 
                   {auth.user.role === 'admin' && (
                     <Link to="/administracion/postspendientes" className="btn btn-primary ">
-                      Administration  
+                      Administration
                     </Link>
                   )}
 
