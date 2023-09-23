@@ -51,7 +51,7 @@ export const postconbloqueo = (user, auth) => async (dispatch) => {
 };
 
  
-export const bloquearelusuario= (user, auth) => async (dispatch) => {
+export const bloqueuser = (user, auth) => async (dispatch) => {
   try {
     dispatch({type: BLOQUEOSPOST_TYPES.LOADING, payload: true})
 
@@ -69,7 +69,7 @@ export const bloquearelusuario= (user, auth) => async (dispatch) => {
     });
   }
 };
-export const dejarelbloqueo = (user, auth) => async (dispatch) => {
+export const nonlbloqueuser = (user, auth) => async (dispatch) => {
   try {
     dispatch({type: BLOQUEOSPOST_TYPES.LOADING, payload: true})
 

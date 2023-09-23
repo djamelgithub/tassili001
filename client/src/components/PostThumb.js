@@ -9,17 +9,17 @@ const PostThumb = ({ posts, result }) => {
 
     return (
         <div>
-            <div className="card-title mt-2 mr-2"  >
-                 
-            <h5 className="card-title" style={{ color: 'blue', marginRight: '1px'}}>Explorez plus de voitures</h5>
-
-                    
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title" style={{ color: 'blue' }}>Explorez plus de voitures</h5>
+                    <p className="card-text">Découvrez des voitures supplémentaires auprès des utilisateurs que vous ne suivez pas encore, et recevez des notifications.</p>
+                </div>
             </div>
 
 
 
 
-            <div className="post_thumb mb-2">
+            <div className="post_thumb">
                 {
                     posts.map(post => (
                         <Link key={post._id} to={`/post/${post._id}`}>

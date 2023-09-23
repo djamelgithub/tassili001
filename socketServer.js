@@ -62,6 +62,15 @@ const SocketServer = (socket) => {
         }
     })
 
+// Emitir un mensaje a un usuario específico (server.js)
+/*socket.on('addMessage', async (msg) => {
+    // ... Guarda el mensaje en la base de datos y realiza otras acciones necesarias
+
+    const recipientSocket = onlineUsers[msg.to];
+    if (recipientSocket) {
+        io.to(recipientSocket).emit('messageToClient', msg);
+    }
+});*/
 
     // Comments
     socket.on('createComment', newPost => {

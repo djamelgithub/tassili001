@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CommentDisplay from './comments/CommentDisplay'
- import { useTranslation } from 'react-i18next'
- import { useSelector  } from 'react-redux'
-const Comments = ({post}) => {
-   
-    const {  languagee } = useSelector(state => state)
-     
-       const { t } = useTranslation();
-   
-     
 
+const Comments = ({post}) => {
     const [comments, setComments] = useState([])
     const [showComments, setShowComments] = useState([])
     const [next, setNext] = useState(2)
@@ -41,14 +33,14 @@ const Comments = ({post}) => {
                 ? <div className="p-2 border-top"
                 style={{cursor: 'pointer', color: 'crimson'}}
                 onClick={() => setNext(next + 10)}>
-                       {t('See more comments', { lng: languagee.language })}...
+                    Voir plus de commentaires...
                 </div>
 
                 : comments.length > 2 &&
                 <div className="p-2 border-top"
                 style={{cursor: 'pointer', color: 'crimson'}}
                 onClick={() => setNext(2)}>
-                      {t('Hide comments', { lng: languagee.language })}...
+                    Masquer les commentaires...
                 </div>
             }
         </div>

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route,Redirect } from 'react-router-dom'
 
 import PageRender from './customRouter/PageRender'
 import PrivateRouter from './customRouter/PrivateRouter'
@@ -35,11 +35,18 @@ import { getPostsadmin } from './redux/actions/postadminAction'
 import StatusadminModal from './components/statusmodelll/StatusadminModal'
 import StatusModal from './components/statusmodelll/StatusModal'
 import Infoclient from './pages/infoclient'
+import Bloqueos from './pages/bloqueos'
 
 
 function App() {
   const { auth, status, statusadmin, modal, call } = useSelector(state => state)
+  const { user } = useSelector(state => state.auth);
   const dispatch = useDispatch()
+
+  const userBlocked = user && user.bloquepost === 'bloque-user';
+
+  // Si el usuario está bloqueado según la condición de bloqueo, no mostrar el encabezado
+ 
 
 
 
@@ -77,7 +84,7 @@ function App() {
   }, [])
 
 
- 
+  
 
 
   return (
@@ -104,7 +111,11 @@ function App() {
           <Route exact path="/pages/bloqueos/blockposts" component={Blockposts} />
           <Route exact path="/pages/users/usersposts" component={Usersposts} />
           <Route exact path="/pages/infoclient" component={Infoclient} />
-
+      
+          <Route
+            path="/pages/bloqueos"
+            render={() => (userBlocked ? <Bloqueos /> : <Redirect to="/" />)}
+          />
           <PrivateRouter exact path="/:page" component={PageRender} />
           <PrivateRouter exact path="/:page/:id" component={PageRender} />
 

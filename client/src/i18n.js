@@ -173,7 +173,7 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
           "comments": "commentaires",
           "likes": "likes",
           "Copy Link": "Copier le lien",
-          "Denunciar": "Signaler aux administration",
+          "Denunciar": "Signaler",
           "Edit automobile": "Modifier la voiture",
           "Aprove automobile": "Approuver la voiture",
           "See more comments": "Voir plus de commentaires",

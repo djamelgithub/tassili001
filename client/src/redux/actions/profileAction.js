@@ -12,12 +12,9 @@ export const PROFILE_TYPES = {
     GET_ID: 'GET_PROFILE_ID',
     GET_POSTS: 'GET_PROFILE_POSTS',
     UPDATE_POST: 'UPDATE_PROFILE_POST',
-    SET_HEADER_VISIBILITY:'SET_HEADER_VISIBILITY'
+ 
 }
-export const setHeaderVisibility = (isHeaderVisible) => ({
-    type: 'SET_HEADER_VISIBILITY',
-    payload: isHeaderVisible,
-  });
+ 
 
 export const getProfileUsers = ({id, auth}) => async (dispatch) => {
     dispatch({type: PROFILE_TYPES.GET_ID, payload: id})

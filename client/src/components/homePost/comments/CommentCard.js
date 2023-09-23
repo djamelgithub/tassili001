@@ -8,16 +8,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import CommentMenu from './CommentMenu'
 import { updateComment, likeComment, unLikeComment } from '../../../redux/actions/commentAction'
 import InputComment from '../InputComment'
-import { useTranslation } from 'react-i18next'
- 
- 
-  
 
-  
 const CommentCard = ({children, comment, post, commentId}) => {
-    const { auth, theme,languagee } = useSelector(state => state)
+    const { auth, theme } = useSelector(state => state)
     const dispatch = useDispatch()
- const { t } = useTranslation();
+
     const [content, setContent] = useState('')
     const [readMore, setReadMore] = useState(false)
 
@@ -78,7 +73,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
 
     return (
         <div className="comment_card mt-2" style={styleCard}>
-         <Link to={`/profile/${comment.user._id}`} className="d-flex text-dark">
+            <Link to={`/profile/${comment.user._id}`} className="d-flex text-dark">
                 <Avatar src={comment.user.avatar} size="small-avatar" />
                 <h6 className="mx-1">{comment.user.username}</h6>
             </Link>
@@ -97,7 +92,7 @@ const CommentCard = ({children, comment, post, commentId}) => {
                         : <div>
                             {
                                 comment.tag && comment.tag._id !== comment.user._id &&
-                                <Link to={`/profile/${comment.tag._id}`}  >
+                                <Link to={`/profile/${comment.tag._id}`} className="mr-1">
                                     @{comment.tag.username}
                                 </Link>
                             }
@@ -110,39 +105,42 @@ const CommentCard = ({children, comment, post, commentId}) => {
                             {
                                 content.length > 100 &&
                                 <span className="readMore" onClick={() => setReadMore(!readMore)}>
-                                    {readMore ? 'Masquer le contenu' : 'Lire la suite'}
+                                    {readMore ? 'Masquer le contenu' : 'Lire plus'}
                                 </span>
                             }
                         </div>
                     }
                     
 
-                    <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-  <small className="text-muted mr-3" style={{ color: '#999' }}>
-    {moment(comment.createdAt).fromNow()}
-  </small>
+                    <div style={{cursor: 'pointer'}}>
+                        <small className="text-muted mr-3">
+                            {moment(comment.createdAt).fromNow()}
+                        </small>
 
-  <small className="font-weight-bold mr-3" style={{ color: '#007BFF' }}>
-    {comment.likes.length}   {t('likes', { lng: languagee.language })}
-  </small>
+                        <small className="font-weight-bold mr-3">
+                            {comment.likes.length} Aime
+                        </small>
 
-  {
-    onEdit
-    ? <>
-      <small className="font-weight-bold  " style={{ color: '#28A745' }} onClick={handleUpdate}>
-      {t('update', { lng: languagee.language })}
-      </small>
-      <small className="font-weight-bold"   style={{ color: '#DC3545' }} onClick={() => setOnEdit(false)}>
-      {t('cancel', { lng: languagee.language })}
-      </small>
-    </>
+                        {
+                            onEdit
+                            ? <>
+                                <small className="font-weight-bold mr-3"
+                                onClick={handleUpdate}>
+                                    Mise à jour
+                                </small>
+                                <small className="font-weight-bold mr-3"
+                                onClick={() => setOnEdit(false)}>
+                                    Anule
+                                </small>
+                            </>
 
-    : <small className="font-weight-bold  " style={{ color: onReply ? '#DC3545' : '#17A2B8' }} onClick={handleReply}>
-        {onReply ? t('Annuler') : t('Répondre')}
-      </small>
-  }
-</div>
-
+                            : <small className="font-weight-bold mr-3"
+                            onClick={handleReply}>
+                                {onReply ? 'Anule' :'Répondre'}
+                            </small>
+                        }
+                        
+                    </div>
                     
                 </div>
 

@@ -111,7 +111,7 @@ export const likePost = ({ post, auth, socket }) => async (dispatch) => {
         // Notify
         const msg = {
             id: auth.user._id,
-            text: 'il a aimé votre publication.',
+            text: 'a aimé votre publication.',
             recipients: [post.user._id],
             url: `/post/${post._id}`,
             content: post.content,
@@ -140,7 +140,7 @@ export const unLikePost = ({ post, auth, socket }) => async (dispatch) => {
         // Notify
         const msg = {
             id: auth.user._id,
-            text: 'il a aimé votre publication.',
+            text: 'a aimé votre publication.',
             recipients: [post.user._id],
             url: `/post/${post._id}`,
         }
@@ -184,7 +184,7 @@ export const deletePost = ({ post, auth, socket }) => async (dispatch) => {
         // Notify
         const msg = {
             id: post._id,
-            text: 'ajouter une nouvelle publication.',
+            text: 'a ajouter une nouvelle publication.',
             recipients: res.data.newPost.user.followers,
             url: `/post/${post._id}`,
         }

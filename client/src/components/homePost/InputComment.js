@@ -2,15 +2,11 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { createComment } from '../../redux/actions/commentAction'
 import Icons from '../Icons'
- 
+
 const InputComment = ({children, post, onReply, setOnReply}) => {
     const [content, setContent] = useState('')
 
-    const { auth, socket, theme  } = useSelector(state => state)
-    const { user } = useSelector(state => state.auth);
-    const { bloquecomment } = user;
-     
-      
+    const { auth, socket, theme } = useSelector(state => state)
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
@@ -37,27 +33,28 @@ const InputComment = ({children, post, onReply, setOnReply}) => {
     }
 
     return (
-        <form className="card-footer comment_input" onSubmit={handleSubmit} >
-            {children}
-            <input type="text"  disabled={bloquecomment === 'bloque-comment'}   
-            value={content} onChange={e => setContent(e.target.value)}
+        <form className="card-footer comment_input " onSubmit={handleSubmit} >
+        {children}
+        <input
+            type="text"
+            placeholder="Ajoutez vos commentaires.."
+            value={content}
+            onChange={e => setContent(e.target.value)}
             style={{
                 filter: theme ? 'invert(1)' : 'invert(0)',
                 color: theme ? 'white' : '#111',
-                background: theme ? 'rgba(0,0,0,.03)' : '', 
-                    
+                background: theme ? 'rgba(0,0,0,.03)' : '',
+                backgroundColor: '#e0e0ff', // Color azul muy claro
             }}
-           
-            
-            />
-
-            <Icons setContent={setContent} content={content} theme={theme} />
-
-            <button type="submit"  className='btn btn-info' style={{   borderRadius: '15px'  }} >
-            Envoyer
+        />
+    
+        <Icons setContent={setContent} content={content} theme={theme} />
+    
+        <button type="submit" className="postBtn">
+            Envoiye
         </button>
-        </form>
-      
+    </form>
+    
     )
 }
 

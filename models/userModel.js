@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 
 const userSchema = new mongoose.Schema({
-  
+   
     username: {
         type: String,
         required: true,
@@ -24,9 +24,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'https://res.cloudinary.com/devatchannel/image/upload/v1602752402/avatar/avatar_cugq40.png'
     },
-   role: {
+    role: {
         type: String,
-        enum: ['bloqueado', 'user', 'superuser', 'moderador' , 'admin'],
+        enum: ['Utilisateur-No-authentifié', 'user', 'superuser', 'moderador' , 'admin'],
         default: 'user'
     },
 

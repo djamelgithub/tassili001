@@ -186,10 +186,10 @@ const RightSide = () => {
                     user.length !== 0 &&
                     <UserCard user={user}>
                         <div>
-                            <i className="fas fa-phone-alt"
+                            <i className=" "
                             onClick={handleAudioCall} />
 
-                            <i className="fas fa-video mx-3"
+                            <i className=" "
                             onClick={handleVideoCall} />
 
                             <i className="fas fa-trash text-danger"

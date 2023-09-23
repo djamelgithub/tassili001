@@ -1,6 +1,6 @@
  
 import { useSelector, useDispatch } from 'react-redux';
-import { postconbloqueo, postsinbloqueo } from '../../redux/actions/bloqueos/bloquepostAction';
+import { postconbloqueo, postsinbloqueo, bloqueuser, nonlbloqueuser } from '../../redux/actions/bloqueos/bloquepostAction';
  
  
 import UserCard from './../UserCard'
@@ -22,6 +22,14 @@ const Bloquepost= () => {
         await dispatch(postconbloqueo(user, auth));
         break;
     
+        case 'bloque-user':
+          await dispatch(bloqueuser(user, auth));
+          break;
+
+          case 'non-bloque-user':
+            await dispatch(nonlbloqueuser(user, auth));
+            break;
+
       default:
         break;
     }
@@ -54,6 +62,11 @@ const Bloquepost= () => {
                 <option value=''>Seleccione bloquage post</option>
                 <option value='non-bloque-post'>Non bloqué Post</option>
                 <option value='bloque-post'>Bloqué Post</option>
+                <option value='non-bloque-user'>Non bloqué ulitizateur</option>
+                <option value='bloque-user'>Bloqué utilizateur</option>
+
+
+
               </select>
             </td>
           </tr>

@@ -31,6 +31,27 @@ const SocketClient = () => {
         socket.emit('joinUser', auth.user)
     },[socket, auth.user])
 
+
+// Escuchar mensajes privados entrantes desde el servidor
+/*useEffect(() => {
+    socket.on('messageToClient', (newMessage) => {
+        if (newMessage.recipient === auth.user._id) {
+            // Aquí puedes implementar la lógica de notificación para mostrar el mensaje al usuario actual
+            // Puedes utilizar una librería de notificaciones o crear tu propia interfaz de notificación.
+            // Ejemplo: dispatch({ type: GLOBALTYPES.NOTIFICATION, payload: newMessage });
+        }
+    });
+
+    return () => {
+        socket.off('messageToClient');
+    };
+}, [socket, auth.user._id]);*/
+
+
+
+
+
+
     // Likes
     useEffect(() => {
         socket.on('likeToClient', newPost =>{

@@ -12,6 +12,7 @@ import UserCard from '../UserCard';
  
 
 
+
 const GetUsersPosts = () => {
   const { usersReducer, auth } = useSelector(state => state);
   
@@ -34,7 +35,9 @@ const GetUsersPosts = () => {
 
   return (
 <div>
-     
+      <div className='card mt-4 mb-4'>
+       
+      </div>
 
       <div className="table-responsive">
         <table className="table table-bordered table-striped">

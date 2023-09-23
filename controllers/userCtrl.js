@@ -17,16 +17,7 @@ class APIfeatures {
 }
 
 const userCtrl = {
-    searchUser: async (req, res) => {
-        try {
-            const users = await Users.find({username: {$regex: req.query.username}})
-            .limit(10).select("username email avatar")
-            
-            res.json({users})
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
+ 
         getUsers: async (req, res) => {
             
             try {
@@ -59,7 +50,19 @@ const userCtrl = {
               return res.status(500).json({ msg: err.message });
             }
           },
+          
+  
    
+    searchUser: async (req, res) => {
+        try {
+            const users = await Users.find({username: {$regex: req.query.username}})
+            .limit(10).select(" username avatar")
+            
+            res.json({users})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    }, 
     getUser: async (req, res) => {
         try {
             const user = await Users.findById(req.params.id).select('-password')
@@ -74,10 +77,10 @@ const userCtrl = {
     updateUser: async (req, res) => {
         try {
             const { avatar, username, mobile, address, story, website } = req.body
-            if(!username) return res.status(400).json({msg: "Please add your user name."})
+            if(!username) return res.status(400).json({msg: "Please add your full name."})
 
             await Users.findOneAndUpdate({_id: req.user._id}, {
-                avatar, username, mobile, address, story, website,  
+                avatar,   mobile, address, story, website,  
             })
 
             res.json({msg: "Update Success!"})

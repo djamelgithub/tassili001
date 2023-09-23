@@ -20,7 +20,7 @@ const authCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = new Users({
-     username: newUserName, email, password: passwordHash 
+                  username: newUserName, email, password: passwordHash 
             })
 
 
@@ -52,7 +52,7 @@ const authCtrl = {
             const { email, password } = req.body
 
             const user = await Users.findOne({email})
-            .populate("followers following usariosmehanbloqueado usariosbloqueadospormi", "avatar username    usariosmehanbloqueado  usariosbloqueadospormi followers following")
+            .populate("followers following usariosmehanbloqueado usariosbloqueadospormi", "avatar username   usariosmehanbloqueado  usariosbloqueadospormi followers following")
 
             if(!user) return res.status(400).json({
                 msg:

@@ -56,7 +56,7 @@ const postCtrl = {
             await newPost.save();
 
             res.json({
-                msg: "Votre publication a été envoyé aux administrateurs pour la validation.",
+                msg: "Votre publication a été créée et envoyée aux administrateurs en vue d'une validation postérieure.",
                 newPost: {
                     ...newPost._doc,
                     user: req.user
@@ -193,9 +193,9 @@ const postCtrl = {
                         select: "-password"
                     }
                 });
-               
+
             res.json({
-                msg: "Votre publication a été publiée avec succès.",
+                msg: 'Success!',
                 result: posts.length,
                 posts
             });

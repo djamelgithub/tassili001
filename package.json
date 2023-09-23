@@ -10,7 +10,8 @@
     "server-install": "npm install",
     "client-install": "cd client && npm install",
     "install-all": "concurrently \"npm run server-install\" \"npm run client-install\" ",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "render-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -20,7 +21,7 @@
     "concurrently": "^6.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "dotenv": "^8.6.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "i18next": "^23.4.4",
     "i18next-browser-languagedetector": "^7.1.0",

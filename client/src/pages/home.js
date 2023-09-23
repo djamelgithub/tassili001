@@ -36,27 +36,16 @@ import { getPosts, POST_TYPES } from '../redux/actions/postAction';
 import Kilometrajeautomobile from '../components/ranges/Kilometrajeautomobile';
 
  
-  
-import { setHeaderVisibility } from '../redux/actions/profileAction'; // Asegúrate de importar la acción adecuada
-
+ 
 import { useSelector, useDispatch } from 'react-redux'
-import {  useHistory } from 'react-router-dom'
+ 
 const Home = () => {
   
   const { homePostsReducer, auth, homePostsadminReducer, languagee } = useSelector((state) => state);
-  const { user } = useSelector(state => state.auth);
+ 
   const dispatch = useDispatch()
  
-  const history = useHistory()
-  useEffect(() => {
-    if (user.role === "bloqueado") {
-      dispatch(setHeaderVisibility(false));
-      // Redirige al usuario bloqueado a la página 404
-      history.push('/bloqueos'); // Asegúrate de que la ruta '/404' exista en tus rutas
-    } else {
-      dispatch(setHeaderVisibility(true));
-    }
-  }, [dispatch, user, history]);
+  
   
  
 
@@ -319,7 +308,7 @@ const Home = () => {
                       type="button"
                       onClick={() => setShowSearchFields(!showSearchFields)}
                       style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }}
-                      className="btn btn-primary form-control mb-2 mt-2"
+                      className="btn btn-coral  form-control mt-2"
                     >
                       {t('Rechercheavance', { lng: languagee.language })}{' '}
                       <i className={`fas fa-search ${showSearchFields ? 'active' : ''}`} style={{ marginRight: '5px' }}></i>
@@ -476,8 +465,8 @@ const Home = () => {
 
 
 
-                        <div className="search-container card-body   mb-2 mt-2" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <button type="button" onClick={handleBuscar} className="btn btn-primary">
+                        <div className="search-container card-body   mb-2 mt-2" style={{  display: 'flex', justifyContent: 'space-between' }}>
+                          <button type="button" onClick={handleBuscar} className="btn btn-primary" >
                             Filtre
 
                           </button>
@@ -495,14 +484,14 @@ const Home = () => {
 
 
                 </form>
-                <div className='card mb-2'  >
+                <div className=' form-control '  >
                 
-                  <Link to="/message" style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }} className="btn btn-primary mt-2">
+                  <Link to="/message" style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }} className="btn btn-primary  ">
                   Contacter l'administrateur
                   </Link>
                 </div>
 
-                <div className='card mt-4'>
+                <div className='card mt-2'>
                   {auth.user.role === 'admin' && <Status />}
 
                   {auth.user.role === 'admin' && (

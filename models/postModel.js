@@ -160,7 +160,7 @@ const postSchema = new mongoose.Schema({
     default: 'pendiente'
   },
  
-  //vistas: { type: Number, default: 0 },
+  vistas: { type: Number, default: 0 },
 
 
   likes: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
