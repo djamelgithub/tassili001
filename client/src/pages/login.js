@@ -3,7 +3,8 @@ import { Link, useHistory } from 'react-router-dom'
 import { login } from '../redux/actions/authAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+ 
 const Login = () => {
     const initialState = { email: '', password: '' }
     const [userData, setUserData] = useState(initialState)
@@ -11,17 +12,17 @@ const Login = () => {
     const { t } = useTranslation();
     const [typePass, setTypePass] = useState(false)
 
-    const { auth , languagee} = useSelector(state => state)
+    const { auth, languagee } = useSelector(state => state)
     const dispatch = useDispatch()
     const history = useHistory()
 
     useEffect(() => {
-        if(auth.token) history.push("/")
+        if (auth.token) history.push("/")
     }, [auth.token, history])
 
     const handleChangeInput = e => {
         const { name, value } = e.target
-        setUserData({...userData, [name]:value})
+        setUserData({ ...userData, [name]: value })
     }
 
     const handleSubmit = e => {
@@ -30,49 +31,62 @@ const Login = () => {
     }
 
     return (
-        <div className="auth_page"style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }}>
-            <form onSubmit={handleSubmit}>
-                <h3 className="text-uppercase text-center mb-4">Tassili Automobile</h3> 
-
-                <div className="form-group" style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }} >
-                    <label htmlFor="exampleInputEmail1"   >{t('Email address', { lng: languagee.language })}</label> 
-                    <input type="email" className="form-control" id="exampleInputEmail1" name="email"
-                    aria-describedby="emailHelp" onChange={handleChangeInput} value={email} />
-                    
-                    <small id="emailHelp" className="form-text text-muted" style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }} >
-                    {t('Info', { lng: languagee.language })}     
-                    </small>
-                </div>
-
-                <div className="form-group"style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }}>
-                    <label htmlFor="exampleInputPassword1">{t('Password', { lng: languagee.language })} </label>      
-                 
-
-                    <div className="pass">
-                        
-                        <input type={ typePass ? "text" : "password" } 
-                        className="form-control" id="exampleInputPassword1"
-                        onChange={handleChangeInput} value={password} name="password" />
-
-                        <small onClick={() => setTypePass(!typePass)}>
-                        {typePass ? t('Hide', { lng: languagee.language }) : t('Show', { lng: languagee.language })}
-       </small>
-                    </div>
-                   
-                </div>
+        <Container>
+            <Row className="justify-content-center">
+                <Col xs={12} sm={4} md={7}>
+                    <Card className="my-4">
+                        <Card.Img
+                            src="https://source.unsplash.com/random?wedding"
+                            alt="Wedding"
+                            className="card-img"
+                        />
+                        <Card.Body>
+              <Card.Title className="text-center">{t('Tassili Wedding', { lng: languagee.language })}</Card.Title>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>{t('Email address', { lng: languagee.language })}</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder={t('Enter email', { lng: languagee.language })}
+                    name="email"
+                    onChange={handleChangeInput}
+                    value={email}
+                  />
                 
-                <button type="submit" className="btn btn-dark w-100"
-                disabled={email && password ? false : true}>
-                  {t('Loginn', { lng: languagee.language })} 
-                </button>
-
-               
-
-                <p className="my-2"style={{ textAlign: languagee.language === 'ar' ? 'right' : 'left' }}>
-                {t('You dont have an account?', { lng: languagee.language })}       <Link to="/register" style={{color: "crimson"}}>{t('Register Now', { lng: languagee.language })}  </Link>
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>{t('Password', { lng: languagee.language })}</Form.Label>
+                  <div className="pass">
+                    <Form.Control
+                      type={typePass ? "text" : "password"}
+                      placeholder={t('Password', { lng: languagee.language })}
+                      name="password"
+                      onChange={handleChangeInput}
+                      value={password}
+                    />
+                    <small onClick={() => setTypePass(!typePass)}>
+                      {typePass ? t('Hide', { lng: languagee.language }) : t('Show', { lng: languagee.language })}
+                    </small>
+                  </div>
+                </Form.Group>
+                <Button
+                  variant="dark"
+                  type="submit"
+                  className="w-100"
+                  disabled={email && password ? false : true}
+                >
+                  {t('Loginn', { lng: languagee.language })}
+                </Button>
+                <p className="my-2">
+                  {t('You dont have an account?', { lng: languagee.language })}{' '}
+                  <Link to="/register">{t('Register Now', { lng: languagee.language })}</Link>
                 </p>
-            </form>
-        </div>
+              </Form>
+            </Card.Body>
+            </Card>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 

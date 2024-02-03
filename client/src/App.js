@@ -24,7 +24,6 @@ import SocketClient from './SocketClient'
 import { getNotifies } from './redux/actions/notifyAction'
 import CallModal from './components/message/CallModal'
  
-import Postspendientesss from './pages/administracion/postspendientesss'
 import Blockposts from './pages/bloqueos/blockposts';
 import Blockcomments from './pages/bloqueos/blockcomments';
 import UserRole from './pages/roles/userRole';
@@ -33,17 +32,33 @@ import Usersposts from './pages/users/usersposts'
 import { getUsers } from './redux/actions/users/usersAction'
 import { getPostsadmin } from './redux/actions/postadminAction'
 import StatusadminModal from './components/statusmodelll/StatusadminModal'
-import StatusModal from './components/statusmodelll/StatusModal'
-import Infoclient from './pages/infoclient'
+ import StatusModalsalle from './components/statusmodelll/StatusModalsalle';
+ 
 import Bloqueos from './pages/bloqueos'
-
+import Cervices from './pages/categoriaslista/cervices'
+import Statusmodalservicio from './components/statusmodelll/StatusModalservicio'
+import { getServicios } from './redux/actions/servicioAction'
+ 
+import Index from './pages/administracion'
+ 
+import Cervicios from './pages/cervicios'
+import Salasfiestas from './pages/salasfiestas'
+import Postspendientes from './pages/administracion/postspendientes'
+import Serviciospendientes from './pages/administracion/serviciospendientes'
+import { getServiciosPendientesss } from './redux/actions/servicioaproveAction'
+import Notificacionesusuario from './pages/notificacionesusuario'
+import Infoclient from './pages/infoclient'
+ 
+ 
 
 function App() {
-  const { auth, status, statusadmin, modal, call } = useSelector(state => state)
+  const { auth, status,statusservicio,statusadmin, modal, call } = useSelector(state => state)
   const { user } = useSelector(state => state.auth);
-  const dispatch = useDispatch()
-
+ 
+ const dispatch = useDispatch()
   const userBlocked = user && user.bloquepost === 'bloque-user';
+ 
+ 
 
   // Si el usuario está bloqueado según la condición de bloqueo, no mostrar el encabezado
  
@@ -57,14 +72,22 @@ function App() {
     dispatch({ type: GLOBALTYPES.SOCKET, payload: socket })
     return () => socket.close()
   }, [dispatch])
+ 
 
-  useEffect(() => {
+ 
+
+
+  useEffect(() => 
+  { dispatch(getPosts())
+  dispatch(getServicios())
     if (auth.token) {
 
       dispatch(getPostsadmin(auth.token))
       dispatch(getUsers(auth.token))
       dispatch(getPostsPendientesss(auth.token))
-      dispatch(getPosts(auth.token))
+      dispatch(getServiciosPendientesss(auth.token))
+     
+     
       dispatch(getSuggestions(auth.token))
       dispatch(getNotifies(auth.token))
     }
@@ -92,25 +115,43 @@ function App() {
       <Alert />
 
       <input type="checkbox" id="theme" />
-      <div className={`App ${(status || statusadmin || modal) && 'mode'}`}>
+      <div className={`App ${(status || statusservicio||  statusadmin || modal) && 'mode'}`}>
         <div className="main">
-          {auth.token && <Header />}
-          {status && <StatusModal />}
+        <Header />   
+          {status && <StatusModalsalle />}
+          {statusservicio && <Statusmodalservicio/>}
           {statusadmin && <StatusadminModal />}
           {auth.token && <SocketClient />}
           {call && <CallModal />}
 
-
-          <Route exact path="/" component={auth.token ? Home : Login} />
+          <Route exact path="/" component={Home} />
+        
           <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
 
-          <Route exact path="/administracion/postspendientes" component={Postspendientesss} />
-
-          <Route exact path="/pages/roles/userRole" component={UserRole} />
-          <Route exact path="/pages/bloqueos/blockcomments" component={auth.token ? Blockcomments : Login} />
+          <Route exact path="/pages/notificacionesusuario" component={Notificacionesusuario} />
+       
+          <Route exact path="/pages/cervicios" component={Cervicios} />
+          <Route exact path="/pages/salasfiestas" component={Salasfiestas} />
+          <Route exact path="/administracion/postspendientes" component={Postspendientes} />
+                           
+          <Route exact path="/administracion/serviciospendientes" component={Serviciospendientes} />
+          <Route exact path="/pages/categoriaslista/cervices" component={Cervices} />
+                              
+          <Route exact path="/pages/administracion/index" component={Index} />
           <Route exact path="/pages/bloqueos/blockposts" component={Blockposts} />
-          <Route exact path="/pages/users/usersposts" component={Usersposts} />
-          <Route exact path="/pages/infoclient" component={Infoclient} />
+
+          <Route
+            path="/pages/bloqueos"
+            render={() => (userBlocked ? <Bloqueos /> : <Redirect to="/" />)}
+          />
+
+          <Route exact path="/roles/userRole" component={UserRole} />
+          <Route exact path="/bloqueos/blockcomments" component={auth.token ? Blockcomments : Login} />
+          <Route exact path="/bloqueos/blockposts" component={Blockposts} />
+          <Route exact path="/bloqueos/blockcomments" component={Blockcomments} />
+          <Route exact path="/users/usersposts" component={Usersposts} />
+          <Route exact path="/infoclient" component={Infoclient} />
       
           <Route
             path="/pages/bloqueos"

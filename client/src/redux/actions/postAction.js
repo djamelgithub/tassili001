@@ -17,10 +17,10 @@ export const POST_TYPES = {
 
 
 
-export const getPosts = (token) => async (dispatch) => {
+export const getPosts = () => async (dispatch) => {
     try {
         dispatch({ type: POST_TYPES.LOADING_POST, payload: true })
-        const res = await getDataAPI('posts', token)
+        const res = await getDataAPI('posts' )
 
         dispatch({
             type: POST_TYPES.GET_POSTS,
@@ -36,7 +36,7 @@ export const getPosts = (token) => async (dispatch) => {
     }
 }
 
-export const updatePost = ({ postData, marca, modelo, wilaya, commune, specifications, images, auth, status }) => async (dispatch) => {
+export const updatePost = ({ postData, selectedOptions, wilaya, commune, specifications, images, auth, status }) => async (dispatch) => {
     let media = [];
     const imgNewUrl = images.filter((img) => !img.url);
     const imgOldUrl = images.filter((img) => img.url);
@@ -44,6 +44,7 @@ export const updatePost = ({ postData, marca, modelo, wilaya, commune, specifica
     if (
         status.postData === postData &&
         status.specifications === specifications &&
+        status.selectedOptions === selectedOptions &&
         imgNewUrl.length === 0 &&
         imgOldUrl.length === status.images.length
     ) {
@@ -56,18 +57,7 @@ export const updatePost = ({ postData, marca, modelo, wilaya, commune, specifica
 
         const updatedData = {
             content: postData.content,
-            ventalocation: postData.ventalocation,
-
-            pricelocacion: postData.pricelocacion,
-
-            ano: postData.ano,
-            versionfinition: postData.versionfinition,
-            motor: postData.motor,
-            inergia: postData.inergia,
-            transmicion: postData.transmicion,
-            kilometraje: postData.kilometraje,
-            color: postData.color,
-            papeles: postData.papeles,
+            
             discripcion: postData.discripcion,
             price: postData.price,
             dinero: postData.dinero,
@@ -75,11 +65,11 @@ export const updatePost = ({ postData, marca, modelo, wilaya, commune, specifica
             nomprenom: postData.nomprenom,
             telefono: postData.telefono,
             email: postData.email,
-            marca,
-            modelo,
+
             wilaya,
             commune,
             specifications,
+            selectedOptions,
             privacidad_informations: postData.privacidad_informations,
             privacidad_commentarios: postData.privacidad_commentarios,
             images: [...imgOldUrl, ...media],
@@ -154,10 +144,10 @@ export const unLikePost = ({ post, auth, socket }) => async (dispatch) => {
     }
 }
 
-export const getPost = ({ detailPost, id, auth }) => async (dispatch) => {
+export const getPost = ({ detailPost, id }) => async (dispatch) => {
     if (detailPost.every(post => post._id !== id)) {
         try {
-            const res = await getDataAPI(`post/${id}`, auth.token)
+            const res = await getDataAPI(`post/${id}`)
 
             dispatch({ type: POST_TYPES.GET_POST, payload: res.data.post })
         } catch (err) {
@@ -176,27 +166,27 @@ export const getPost = ({ detailPost, id, auth }) => async (dispatch) => {
 
 
 export const deletePost = ({ post, auth, socket }) => async (dispatch) => {
-    dispatch({ type: POST_TYPES.DELETE_POST, payload: post })
-
-    try {
-        const res = await deleteDataAPI(`post/${post._id}`, auth.token)
-
-        // Notify
-        const msg = {
-            id: post._id,
-            text: 'a ajouter une nouvelle publication.',
-            recipients: res.data.newPost.user.followers,
-            url: `/post/${post._id}`,
+   
+        dispatch({ type: POST_TYPES.DELETE_POST, payload: post});
+    
+        try {
+            const res = await deleteDataAPI(`post/${post._id}`, auth.token);
+    
+            // Notify
+            const msg = {
+                id: post._id,
+                text: 'a ajouter une nouvelle publication Salle des fêtes  .',
+                recipients: res.data.newPost.user.followers,
+                url: `/post/${post._id}`,
+            };
+            dispatch(removeNotify({ msg, auth, socket }));
+        } catch (err) {
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: { error: err.response.data.msg }
+            });
         }
-        dispatch(removeNotify({ msg, auth, socket }))
-
-    } catch (err) {
-        dispatch({
-            type: GLOBALTYPES.ALERT,
-            payload: { error: err.response.data.msg }
-        })
-    }
-}
+    };
 
 export const savePost = ({ post, auth }) => async (dispatch) => {
     const newUser = { ...auth.user, saved: [...auth.user.saved, post._id] }
@@ -226,10 +216,10 @@ export const unSavePost = ({ post, auth }) => async (dispatch) => {
     }
 }
 
-export const incrementViews = ({ post, auth }) => async (dispatch) => {
+export const incrementViews = ({ post }) => async (dispatch) => {
 
     try {
-        await putDataAPI(`post/${post._id}`, auth.token);
+        await putDataAPI(`post/${post._id}` );
 
 
 

@@ -1,41 +1,35 @@
-const router = require('express').Router()
-const postCtrl = require('../controllers/postCtrl')
-const auth = require('../middleware/auth')
- 
- 
+const router = require('express').Router();
+const postCtrl = require('../controllers/postCtrl');
+const auth = require('../middleware/auth');
 
-router.get('/posts', auth, postCtrl.getPosts)
+router.get('/posts',   postCtrl.getPosts);
+router.get('/search',  postCtrl.searchPost)
+router.post('/crearpostpendiente', auth, postCtrl.createPostPendiente);
 
-router.post('/crearpostpendiente', auth, postCtrl.createPostPendiente)
+router.get('/getpostspendientes', auth, postCtrl.getPostsPendientesss);
 
-router.get('/getpostspendientes', auth, postCtrl.getPostsPendientesss)
+router.patch('/aprovarpost/:id/aprovado', auth, postCtrl.aprovarPostPendiente);
 
-router.patch('/aprovarpost/:id/aprovado', auth, postCtrl.aprovarPostPendiente)
+router.delete('/post/:id', auth, postCtrl.deletePostPendiente);
 
-router.delete('/post/:id', auth, postCtrl.deletePostPendiente)
+router.patch('/post/:id', auth, postCtrl.updatePost);
 
-router.patch('/post/:id', auth, postCtrl.updatePost)
+router.get('/post/:id',   postCtrl.getPost);
 
-router.get('/post/:id', auth, postCtrl.getPost)
+router.delete('/post/:id', auth, postCtrl.deletePost);
 
-router.delete('/post/:id', auth, postCtrl.deletePost)
+router.patch('/post/:id/like', auth, postCtrl.likePost);
 
+router.patch('/post/:id/unlike', auth, postCtrl.unLikePost);
 
+router.get('/user_posts/:id', auth, postCtrl.getUserPosts);
 
+router.get('/post_discover', auth, postCtrl.getPostsDicover);
 
-router.patch('/post/:id/like', auth, postCtrl.likePost)
+router.patch('/savePost/:id', auth, postCtrl.savePost);
 
-router.patch('/post/:id/unlike', auth, postCtrl.unLikePost)
+router.patch('/unSavePost/:id', auth, postCtrl.unSavePost);
 
-router.get('/user_posts/:id', auth, postCtrl.getUserPosts)
+router.get('/getSavePosts', auth, postCtrl.getSavePosts);
 
-router.get('/post_discover', auth, postCtrl.getPostsDicover)
-
-router.patch('/savePost/:id', auth, postCtrl.savePost)
-
-router.patch('/unSavePost/:id', auth, postCtrl.unSavePost)
-
-router.get('/getSavePosts', auth, postCtrl.getSavePosts)
-
-
-module.exports = router
+module.exports = router;

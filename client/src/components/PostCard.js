@@ -7,11 +7,13 @@ import CardFooter from "./homePost/post_card/CardFooter";
 import CardHeader from "./homePost/post_card/CardHeader";
 import InputComment from "./homePost/InputComment";
 import { useLocation } from "react-router-dom";
-import CardInfoVenta from './homePost/post_card/CardInfoVenta';
-import CardInfoAlquiler from './homePost/post_card/CardInfoAlquiler';
-import InfoVendidor from "./homePost/post_card/InfoVendidor";
+import CardInfosala from './homePost/post_card/CardInfosala';
+ 
+ import InfoVendidor from "./homePost/post_card/InfoVendidor";  
 import { FaExclamationTriangle } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next'
+  
+ 
 const PostCard = ({ post, theme }) => {
   
  
@@ -49,13 +51,13 @@ const PostCard = ({ post, theme }) => {
         </select>
       </div>
 
-      {isPostDetailPage && tipoTransaccion === 'Vente' && (
-        <CardInfoVenta post={post} />
+     
+   
+      {isPostDetailPage && post.tipo === 'sala' && (
+        <CardInfosala post={post} />
       )}
 
-      {isPostDetailPage && tipoTransaccion === 'Location' && (
-        <CardInfoAlquiler post={post} />
-      )}
+{isPostDetailPage && <InfoVendidor post={post} />}
 
       {isPostDetailPage && post.privacidad_informations !== 'autoriser-les-informations' && (
         <div className="card-body text-danger mt-3 mb-3" style={{ border: '1px solid #ff0000', padding: '10px', marginBottom: '10px' }}>
@@ -73,7 +75,10 @@ const PostCard = ({ post, theme }) => {
 
       {isPostDetailPage && post.privacidad_informations === 'autoriser-les-informations' && (
         <>
-          {isPostDetailPage && <InfoVendidor post={post} />}
+         
+
+
+
         </>
       )}
 

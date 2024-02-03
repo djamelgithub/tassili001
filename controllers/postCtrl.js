@@ -21,21 +21,25 @@ const postCtrl = {
  
 
 
-
+    searchPost: async (req, res) => {
+        try {
+            const posts = await Posts.find({content: {$regex: req.query.username}})
+            .limit(10).select("fullname username avatar")
+            
+            res.json({posts})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
 
 
 
    createPostPendiente: async (req, res) => {
         try {
             const {
-                content, tipoAlquiler, pricelocacion, ventalocation, ano, versionfinition, motor, inergia, transmicion, kilometraje, color, papeles, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
-                specifications,
-                marca,
-                modelo,
-                wilaya, commune, privacidad_informations, privacidad_commentarios,
-
-
-                images
+                content,   specifications,selectedOptions, discripcion, price, dinero, negociable, nomprenom, telefono, email,
+         
+                wilaya, commune, privacidad_informations, privacidad_commentarios, images
             } = req.body;
 
             if (images.length > 3) {
@@ -47,8 +51,9 @@ const postCtrl = {
             }
 
             const newPost = new Posts({
-                content, tipoAlquiler, pricelocacion, ventalocation, ano, versionfinition, motor, inergia, transmicion, kilometraje, color, papeles, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email, specifications, marca, modelo, wilaya, commune, privacidad_informations, privacidad_commentarios,
-                images,
+                content,    specifications, selectedOptions,discripcion, price, dinero, negociable, nomprenom, telefono, email,
+         
+                wilaya, commune, privacidad_informations, privacidad_commentarios, images,
                 estado: 'pendiente',
                 user: req.user._id
             });
@@ -76,32 +81,34 @@ const postCtrl = {
 
 
     getPostsPendientesss: async (req, res) => {
-        try {
 
-
-
-            const features = new APIfeatures(Posts.find(), req.query).paginating()
-
-            const posts = await features.query
-                .sort('-createdAt')
-                .populate("user likes", "avatar username   followers")
-                .populate({
-                    path: "comments",
-                    populate: {
-                        path: "user likes",
-                        select: "-password"
-                    }
+ 
+            try {
+                const features = new APIfeatures(Posts.find({ estado: 'pendiente' }), req.query).paginating();
+        
+                const posts = await features.query
+                    .sort('-createdAt')
+                    .populate("user likes", "avatar username followers")
+                    .populate({
+                        path: "comments",
+                        populate: {
+                            path: "user likes",
+                            select: "-password"
+                        }
+                    });
+        
+                res.json({
+                    msg: "Votre publication a été publiée avec succès.",
+                    result: posts.length,
+                    posts
                 });
+            } catch (err) {
+                return res.status(500).json({ msg: err.message });
+            }
+        },
+        
+        
 
-            res.json({
-                msg: 'Success!',
-                result: posts.length,
-                posts
-            });
-        } catch (err) {
-            return res.status(500).json({ msg: err.message });
-        }
-    },
 
 
     aprovarPostPendiente: async (req, res) => {
@@ -119,71 +126,45 @@ const postCtrl = {
     },
     getPosts: async (req, res) => {
         try {
-            //const userId = req.user._id;
+             
             const {
-                ventalocation, wilaya, commune, marca, modelo, ano, transmicion, color,
-                minAnoVente, maxAnoVente, minpricioVente, maxpricioVente, minanoLocacion, maxanoLocacion,
-                minprecioLocacion, maxprecioLocacion, minkilometraje, maxkilometrraje
+                ventalocation,content, wilaya, commune,   minpriciosala, maxpriciosala, 
             } = req.query;
 
             let query = { estado: 'aprovado' }; // Agregar la condición del ID de usuario
 
 
+
             if (ventalocation) {
-                query.ventalocation = ventalocation;
+                query.salaservicio = ventalocation;
             }
-
-            if (minAnoVente && maxAnoVente) {
-                query.ano = { $gte: minAnoVente, $lte: maxAnoVente };
+            if (content) {
+                query.content = content;
             }
-            if (minpricioVente && maxpricioVente) {
-                query.price = { $gte: minpricioVente, $lte: maxpricioVente };
+            
+            if (minpriciosala && maxpriciosala) {
+                query.price = { $gte: minpriciosala, $lte: maxpriciosala };
             }
-
-            if (minanoLocacion && maxanoLocacion) {
-                query.anolocacion = { $gte: minanoLocacion, $lte: maxanoLocacion };
-            }
-
-            if (minprecioLocacion && maxprecioLocacion) {
-                query.pricelocacion = { $gte: minprecioLocacion, $lte: maxprecioLocacion };
-            }
-            if (minkilometraje && maxkilometrraje) {
-                query.kilometraje = { $gte: minkilometraje, $lte: maxkilometrraje };
-            }
-
+ 
+          
             if (wilaya) {
-                query.wilaya = wilaya;
+                query.wilaya = wilaya.toUpperCase(); // o toLowerCase()
             }
-
+            
             if (commune) {
-                query.commune = commune;
+                query.commune = commune.toUpperCase(); // o toLowerCase()
             }
+            
+            
 
-            if (marca) {
-                query.marca = marca;
-            }
-
-            if (modelo) {
-                query.modelo = modelo;
-            }
-
-            if (ano) {
-                query.ano = ano;
-            }
-            if (transmicion) {
-                query.transmicion = transmicion; // Agregar campo de búsqueda por transmicion
-            }
-
-            if (color) {
-                query.color = color;
-            }
-
+         
 
 
 
             const features = new APIfeatures(Posts.find(query), req.query).paginating()//(user:  req.user._id)
 
             const posts = await features.query
+          
                 .sort('-createdAt')
                 .populate("user likes", "avatar username   followers")
                 .populate({
@@ -193,7 +174,7 @@ const postCtrl = {
                         select: "-password"
                     }
                 });
-
+            
             res.json({
                 msg: 'Success!',
                 result: posts.length,
@@ -208,22 +189,20 @@ const postCtrl = {
 
     updatePost: async (req, res) => {
         try {
-            const { content, tipoAlquiler, pricelocacion, ventalocation, ano, versionfinition, motor, inergia, transmicion, kilometraje, color, papeles, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
+            const { content,      selectedOptions, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
                 specifications,
-                marca,
-                modelo,
+               
                 wilaya, commune, privacidad_informations, privacidad_commentarios,
                 images } = req.body;
 
             const post = await Posts.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    content, tipoAlquiler, pricelocacion, ventalocation, ano, versionfinition, motor, inergia, transmicion, kilometraje, color, papeles, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
-                    specifications,
-                    marca,
-                    modelo,
-                    wilaya, commune, privacidad_informations, privacidad_commentarios,
-                    images
+                    content,     selectedOptions, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
+                specifications,
+               
+                wilaya, commune, privacidad_informations, privacidad_commentarios,
+                images
                 }
             )
                 .populate("user likes", "avatar username  ")
@@ -239,10 +218,9 @@ const postCtrl = {
                 msg: "Updated Post!",
                 newPost: {
                     ...post._doc,
-                    content, tipoAlquiler, pricelocacion, ventalocation, ano, versionfinition, motor, inergia, transmicion, kilometraje, color, papeles, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
+                    content,   price ,    pecifications, discripcion,   dinero, negociable, nomprenom, telefono, email,
                     specifications,
-                    marca,
-                    modelo,
+                  
                     wilaya, commune, privacidad_informations, privacidad_commentarios,
                     images
                 },
@@ -348,7 +326,7 @@ const postCtrl = {
             await Comments.deleteMany({ _id: { $in: post.comments } })
 
             res.json({
-                msg: 'Deleted Post!',
+                msg: 'Publication suprimer!',
                 newPost: {
                     ...post,
                     user: req.user
@@ -366,7 +344,7 @@ const postCtrl = {
             await Comments.deleteMany({ _id: { $in: post.comments } })
 
             res.json({
-                msg: 'Deleted Post!',
+                msg: 'Publication suprimer!',
                 newPost: {
                     ...post,
                     user: req.user

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { GLOBALTYPES } from '../../redux/actions/globalTypes';
 
-const Status = () => {
+const Status  = () => {
   const dispatch = useDispatch();
 
   const buttonStyles = {
@@ -30,4 +30,4 @@ const Status = () => {
   );
 };
 
-export default Status;
+export default Status ;

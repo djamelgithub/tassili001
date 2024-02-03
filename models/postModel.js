@@ -6,36 +6,7 @@ const postSchema = new mongoose.Schema({
     required: false,
 
   },
-  
-  ventalocation: {
-    type: String,
-    required: false,
-
-  },
-
  
-  tipoAlquiler: {
-    type: String,
-    required: false,
-
-  },
-
- 
-
-  
-
-  marca: {
-    type: String,
-    required: false,
-
-  },
-
-  modelo: {
-    type: String,
-    required: false,
-
-  },
-
   wilaya: {
     type: String,
     required: false
@@ -45,49 +16,19 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-
-
-  ano: {
+  tipoTransaccion: {
     type: String,
+    default: 'sala', // Puedes establecer el valor predeterminado aquí
+    required: true,
+  },
+
+  selectedOptions: {
+    type: Array,
     required: false,
 
   },
 
-  versionfinition: {
-    type: String,
-    required: false
-  },
-
-  motor: {
-    type: String,
-    required: false
-  },
-
-  inergia: {
-    type: String,
-    required: false
-  },
-
-  transmicion: {
-    type: String,
-    required: false
-  },
-
-  kilometraje: {
-    type: String,
-    required: false
-  },
-
-  color: {
-    type: String,
-    required: false
-  },
-
-  papeles: {
-    type: String,
-    required: false
-  },
-
+   
   specifications: {
     type: Array,
     required: false,
@@ -103,12 +44,7 @@ const postSchema = new mongoose.Schema({
     required: false
   },
    
-  pricelocacion: {
-    type: Number,
-    required: false
-  },
   
-
   dinero: {
     type: String,
     required: false

@@ -5,16 +5,16 @@ import 'rc-slider/assets/index.css';
  
 
 const Ventaprecioautomobile = ({VentaPrecioAutomobileee}) => {
-  const [precioventa, setPrecioVenta ] = useState([100, 3000]);
+  const [precioventa, setPrecioVenta ] = useState([5, 300]);
 
   return (
     <div className='card'>
       <label>
       Prix en Milions centimes
         <Slider
-          min={100}
-          max={3000}
-          step={20}
+          min={5}
+          max={300}
+          step={5}
           range
           value={precioventa}
           onChange={(newRange) => {

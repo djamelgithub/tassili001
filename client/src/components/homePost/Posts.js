@@ -13,7 +13,7 @@ import PostCard from './../PostCard';
 
 
 const Posts = () => {
-  const { homePostsReducer, auth, theme } = useSelector((state) => state);
+  const { homePostsReducer,   theme } = useSelector((state) => state);
 
 
 
@@ -23,7 +23,7 @@ const Posts = () => {
 
   const handleLoadMore = async () => {
     setLoad(true);
-    const res = await getDataAPI(`/posts?limit=${homePostsReducer.page * 9}`, auth.token);
+    const res = await getDataAPI(`/posts?limit=${homePostsReducer.page * 9}` );
 
     dispatch({
       type: POST_TYPES.GET_POSTS,
@@ -39,21 +39,21 @@ const Posts = () => {
        
 
 
-      <div className="post_thumb">
-        {
-          homePostsReducer.posts.map(post => (
-            <PostCard key={post._id} post={post} theme={theme} />
-          ))
-        }
+       <div className="post_thumb">
+  {
+    homePostsReducer.posts && Array.isArray(homePostsReducer.posts) && homePostsReducer.posts.map(post => (
+      <PostCard key={post._id} post={post} theme={theme} />
+    ))
+  }
 
-        {
-          load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
-        }
+  {
+    load && <img src={LoadIcon} alt="loading" className="d-block mx-auto" />
+  }
 
+  <LoadMoreBtn result={homePostsReducer.result} page={homePostsReducer.page}
+    load={load} handleLoadMore={handleLoadMore} />
+</div>
 
-        <LoadMoreBtn result={homePostsReducer.result} page={homePostsReducer.page}
-          load={load} handleLoadMore={handleLoadMore} />
-      </div>
     </div >
   );
 };

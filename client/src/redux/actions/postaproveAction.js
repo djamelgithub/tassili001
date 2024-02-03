@@ -13,13 +13,13 @@ export const POSTAPROVE_TYPES = {
 }
 
 
-export const createPostPendiente = ({ postData, marca, modelo, wilaya, commune, specifications, images, auth, socket }) => async (dispatch) => {
+export const createPostPendiente = ({ postData, selectedOptions,  wilaya, commune, specifications, images, auth, socket }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (images.length > 0) media = await imageUpload(images)
 
-        const res = await postDataAPI('crearpostpendiente', { ...postData, marca, modelo, wilaya, commune, specifications, images: media }, auth.token)
+        const res = await postDataAPI('crearpostpendiente', { ...postData, selectedOptions, wilaya, commune, specifications, images: media }, auth.token)
  
         dispatch({
             type: POSTAPROVE_TYPES.CREATE_POST_PENDIENTE,
@@ -37,7 +37,7 @@ export const createPostPendiente = ({ postData, marca, modelo, wilaya, commune, 
         // Notify
         const msg = {
             id: res.data.newPost._id,
-            text: 'ajouter une nouvelle publication.',
+            text: 'a ajouter une nouvelle publication Salle des fêtes.',
             recipients: res.data.newPost.user.followers,
             url: `/post/${res.data.newPost._id}`,
              
@@ -57,7 +57,7 @@ export const getPostsPendientesss = (token) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
         const res = await getDataAPI('getpostspendientes', token);
-        
+         
         dispatch({
             type: POSTAPROVE_TYPES.GET_POSTS_PENDIENTES,
             payload: { ...res.data, page: 2 }

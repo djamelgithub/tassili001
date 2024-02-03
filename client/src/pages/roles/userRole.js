@@ -1,171 +1,289 @@
+ 
 import React, { useEffect } from 'react'
-import RolUsuario from '../../components/roles/RolUsuario'
 import { Link } from 'react-router-dom'
-import jQuery from 'jquery'
+import { useSelector,useDispatch } from 'react-redux'
+ 
 
-import { useSelector } from 'react-redux'
-import Avatar from '../../components/Avatar'
+import jQuery from 'jquery'
+import { logout } from '../../redux/actions/authAction';
+import RolUsuario from '../../components/roles/RolUsuario'
+ 
+import Search from '../../components/header/Search'
+ 
 
 const UserRole = () => {
+
     const { auth } = useSelector(state => state)
-    
-
-    useEffect(() => {
-
-        jQuery(function ($) {
-
-            $(".sidebar-dropdown > a").click(function () {
-                $(".sidebar-submenu").slideUp(200);
-                if (
-                    $(this)
-                        .parent()
-                        .hasClass("active")
-                ) {
-                    $(".sidebar-dropdown").removeClass("active");
-                    $(this)
-                        .parent()
-                        .removeClass("active");
-                } else {
-                    $(".sidebar-dropdown").removeClass("active");
-                    $(this)
-                        .next(".sidebar-submenu")
-                        .slideDown(200);
-                    $(this)
-                        .parent()
-                        .addClass("active");
-                }
-            });
-
-            $("#close-sidebar").click(function () {
-                $(".page-wrapper").removeClass("toggled");
-            });
-            $("#show-sidebar").click(function () {
-                $(".page-wrapper").addClass("toggled");
-            });
-        });
-    }, [])
-
-    const avatarSrc = auth?.user?.avatar;
-    const username = auth?.user?.username;
-    const role = auth?.user?.role || "Unknown Role"; // Valor predeterminado si role no está presente
+ const isAuthenticated = !!auth.token;
+const dispatch = useDispatch();
 
 
-   
+
+  useEffect(() => {
+
+    jQuery(function ($) {
+
+      $(".sidebar-dropdown > a").click(function () {
+        $(".sidebar-submenu").slideUp(200);
+        if (
+          $(this)
+            .parent()
+            .hasClass("active")
+        ) {
+          $(".sidebar-dropdown").removeClass("active");
+          $(this)
+            .parent()
+            .removeClass("active");
+        } else {
+          $(".sidebar-dropdown").removeClass("active");
+          $(this)
+            .next(".sidebar-submenu")
+            .slideDown(200);
+          $(this)
+            .parent()
+            .addClass("active");
+        }
+      });
+
+      $("#close-sidebar").click(function () {
+        $(".page-wrapper").removeClass("toggled");
+      });
+      $("#show-sidebar").click(function () {
+        $(".page-wrapper").addClass("toggled");
+      });
+    });
+  }, [])
 
 
-    return (
-        <div className="  sidebaraprove page-wrapper chiller-theme toggled" >
+  const avatarSrc = auth?.user?.avatar;
+  const username = auth?.user?.username;
+  const role = auth?.user?.role || "Unknown Role"; // Valor predeterminado si role no está presente
 
-            <button id="show-sidebar" className="btn btn-sm btn-dark"  >
-                <i className="fas fa-bars" />
-            </button>
 
-            <nav id="sidebar" className="sidebar-wrapper">
+
+
+
+  return (
+    <div className="  sidebaraprove page-wrapper chiller-theme toggled" >
+      <button id="show-sidebar" className="btn btn-sm btn-dark"  >
+        <i className="fas fa-bars" />
+      </button>
+      <nav id="sidebar" className="sidebar-wrapper">
         <div className="sidebar-content">
           <div className="sidebar-brand">
-            <Link to="/" style={{ textDecoration: 'none', color: '#fff' }}>
-              <span style={{ fontSize: '1.5rem' }}>Tassili</span>
+            <Link className="dropdown-item" to='/'>
+
+              <span>Tassili Web Site</span>
             </Link>
             <div id="close-sidebar">
-            <i className="fas fa-bars" style={{ color: 'red', fontSize: '1.5rem' }} />
-
-
-
+              <i className="fas fa-times" />
             </div>
           </div>
-          <div className="sidebar-header" style={{ marginTop: '20px' }}>
+          <div className="sidebar-header">
+
             <div className="user-pic">
-              {avatarSrc && <Avatar src={avatarSrc} className="img-responsive img-rounded" />}
-            </div>
-            <div className="user-info" style={{ marginTop: '10px' }}>
-              <span className="user-name" style={{ color: '#fff', fontSize: '1.2rem' }}>
-                {username && <strong>{username}</strong>}
-              </span>
-              <br />
-              <strong>
-                <span className="user-name" style={{ color: '#f39c12', fontSize: '1rem' }}>
-                  Role : {role}
+              <h5>avatar</h5>
+              <div className="user-info">
+                <span className="user-name">
+                  <strong>username</strong>
                 </span>
-              </strong>
+                <span className="user-role">Role: role</span>
+                <span className="user-status">
+                  <i className="fa fa-circle" />
+                  <span>Online</span>
+                </span>
+              </div>
             </div>
           </div>
 
-          <div>
-            <button style={{ padding: '10px 20px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }} onClick={() => window.location.reload()}>Recevoir de nouveaux articles</button>
 
-          </div>
 
-          <div className="sidebar-menu" style={{ paddingTop: '20px' }}>
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
-              <li className="header-menu" style={{ marginBottom: '10px', color: 'white', fontSize: '18px' }}>
-                Outils d'administration
-              </li>
-              <li className="sidebar-dropdown" style={{ marginBottom: '10px' }}>
-                <Link to="/administracion/postspendientes" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-                  <i className="fa fa-chart-line" style={{ fontSize: '20px', marginRight: '10px' }} />
-                  <span style={{ fontSize: '16px' }}>Approbation automobiles</span>
-                </Link>
-              </li>
-              <li className="sidebar-dropdown" style={{ marginBottom: '10px' }}>
-                <Link to="/pages/users/usersposts" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-                  <i className="fa fa-chart-line" style={{ fontSize: '20px', marginRight: '10px' }} />
-                  <span style={{ fontSize: '16px' }}>Liste d'utilisateur</span>
-                </Link>
-              </li>
-              <li className="sidebar-dropdown" style={{ marginBottom: '10px' }}>
-                <Link to="/pages/bloqueos/blockcomments" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-                  <i className="fa fa-chart-line" style={{ fontSize: '20px', marginRight: '10px' }} />
-                  <span style={{ fontSize: '16px' }}>Bloquer commentaires</span>
-                </Link>
-              </li>
-              <li className="sidebar-dropdown" style={{ marginBottom: '10px' }}>
-                <Link to="/pages/roles/userRole" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-                  <i className="fa fa-chart-line" style={{ fontSize: '20px', marginRight: '10px' }} />
-                  <span style={{ fontSize: '16px' }}>Attribuer des rôles</span>
-                </Link>
-              </li>
-              <li className="sidebar-dropdown" style={{ marginBottom: '10px' }}>
-                <Link to="/pages/bloqueos/blockposts" style={{ color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
-                  <i className="fa fa-chart-line" style={{ fontSize: '20px', marginRight: '10px' }} />
-                  <span style={{ fontSize: '16px' }}>Bloquer publication</span>
-                </Link>
-              </li>
+
+          <div className="sidebar-menu">
+            <ul className="list-group">
+
+              {isAuthenticated ? (
+                <>
+                  <li className="header-menu" style={{ color: 'red' }}>
+                    <span>Administrations</span>
+                  </li>
+
+
+                  <li>
+                    <Link className="dropdown-item" to="/administracion/postspendientes">
+                      <i className="fa fa-plus-circle" />
+                      <span>Aprouve salle fetes</span>
+                    </Link>
+                  </li>
+
+
+                  <li>
+                    <Link className="dropdown-item" to="/administracion/serviciospendientes">
+                      <i className="fa fa-plus-circle" />
+                      <span>Aprouve services</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/users/usersposts">
+                      <i className="fa fa-plus-circle" />
+                      <span>Utilizateurs</span>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="/roles/userrole">
+                      <i className="fa fa-plus-circle" />
+                      <span>Roles</span>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="/bloqueos/blockposts">
+                      <i className="fa fa-plus-circle" />
+                      <span>Block post</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/bloqueos/blockcomments">
+                      <i className="fa fa-plus-circle" />
+                      <span>Block comment</span>
+                    </Link>
+                  </li>
+
+
+                  <li>
+                    <Link className="dropdown-item" to={`/profile/${auth.user._id}`}>
+                      <i className="fa fa-user" />
+                      <span>Profil</span>
+                    </Link>
+                  </li>
+
+
+                  <li   >
+                    <Link
+                      className="dropdown-item"
+                      to="/"
+                      onClick={() => dispatch(logout())}
+                    >
+                      <i className="fa fa-sign-out-alt" />
+                      Se déconnecter
+                    </Link>
+                  </li>
+                  <li className="header-menu" style={{ color: '#3498db', fontSize: '18px', fontWeight: 'bold' }}>
+                    <span>Catégories</span>
+                  </li>
+
+
+                  <li>
+                    <Link className="dropdown-item" to="/salasfiestas">
+                      <i className="far fa-gem"></i>
+                      <span>Salle</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/cervicios">
+                      <i className="far fa-gem"></i>
+                      <span>Services</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="#">
+                      <i className="far fa-gem"></i>
+                      <span>Téléphone</span>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="#">
+                      <i className="far fa-gem"></i>
+                      <span>Immobilier</span>
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="header-menu">
+                    <span>Usuario No Autenticado</span>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/login">
+                      <i className="fa fa-sign-in-alt" />
+                      <span>Se connecter</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="/register">
+                      <i className="fa fa-user-plus" />
+                      <span>S'inscrire</span>
+                    </Link>
+                  </li>
+
+                  <li className="header-menu" style={{ color: 'red' }}>
+                    <span>Catégories</span>
+                  </li>
+
+
+
+
+
+                  <li>
+                    <Link className="dropdown-item" to="/cervicios">
+                      <i className="far fa-gem"></i>
+                      <span>Services</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to="#">
+                      <i className="far fa-gem"></i>
+                      <span>Téléphone</span>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link className="dropdown-item" to="#">
+                      <i className="far fa-gem"></i>
+                      <span>Immobilier</span>
+                    </Link>
+                  </li>
+
+
+                </>
+              )}
+
             </ul>
           </div>
+
+
 
         </div>
       </nav>
 
-           
-            <main className="page-content">
-                <div className="container-fluid">
 
 
 
+      <main className="page-content">
+        <div className="container-fluid">
 
+ 
+          <Search />
+          <RolUsuario   />
 
-
-                    <RolUsuario   />
-
-
-
-
-
-
-
-
-
-                </div>
-
-            </main>
-      
+ 
 
 
 
 
 
         </div>
-    )
+
+      </main>
+
+
+
+
+    </div>
+  )
 }
 
+ 
 export default UserRole
