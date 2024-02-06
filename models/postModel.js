@@ -1,108 +1,128 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   content: {
     type: String,
-    required: false,
-
+    required: true,
+    maxlength: 50
   },
- 
+  direcion: {
+    type: [String],
+    required: false,
+    maxlength: 50
+  },
   wilaya: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-
   commune: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-  tipoTransaccion: {
-    type: String,
-    default: 'sala', // Puedes establecer el valor predeterminado aquí
-    required: true,
-  },
-
-  selectedOptions: {
+  personName: {
     type: Array,
     required: false,
-
-  },
-
-   
-  specifications: {
-    type: Array,
-    required: false,
-  },
-
-  discripcion: {
-    type: String,
-    required: false
+    maxlength: 250
   },
 
   price: {
-    type: Number,
-    required: false
+    type: [Number],
+    required: true,
   },
-   
-  
-  dinero: {
+
+  eventos: {
+    type: Array,
+    required: false,
+    maxlength: 250
+  },
+
+  nombreapellido: {
     type: String,
-    required: false
-  },
-
-  negociable: {
-    type: String,
-    required: false
+    required: false,
+    maxlength: 50
 
   },
-
-  
-
-  nomprenom: {
-    type: String,
-    required: false
-  },
-
   telefono: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-
   email: {
     type: String,
-    required: false
-  },
- 
-  
-  privacidad_commentarios: {
-    type: String,
-    required: false
-  },
+    eventos: {
+      type: Array,
+      required: false,
+      maxlength: 50
+    },
 
-  privacidad_informations: {
-    type: String,
-    required: false
+    option: {
+      type: String,
+      required: false,
+      maxlength: 50
+    },
+
+    capacidad: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+    invitados: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+    restaurante: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+    decoracion: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+
+    musica: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+    disponibilidad: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+    parking: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+
+
+
+    autre: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+
+
+
   },
-
-
   images: {
     type: Array,
-    required: true
+    required: true,
+    maxlength: 7
+
   },
-
-  estado: {
-    type: String,
-    enum: ['pendiente', 'aprovado', 'rechazado'],
-    default: 'pendiente'
-  },
- 
-  vistas: { type: Number, default: 0 },
-
-
+  estado: { type: String, enum: ['pendiente', 'aprovado', 'eliminado'], default: 'pendiente' },
   likes: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
   comments: [{ type: mongoose.Types.ObjectId, ref: 'comment' }],
   user: { type: mongoose.Types.ObjectId, ref: 'user' }
 }, {
-  timestamps: true
-})
-module.exports = mongoose.model('post', postSchema)
+  timestamps: true,
+});
+
+module.exports = mongoose.model('post', postSchema);

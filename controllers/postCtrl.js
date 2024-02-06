@@ -32,14 +32,14 @@ const postCtrl = {
         }
     },
 
-
+/*
 
    createPostPendiente: async (req, res) => {
         try {
             const {
                 content,   specifications,selectedOptions, discripcion, price, dinero, negociable, nomprenom, telefono, email,
          
-                wilaya, commune, privacidad_informations, privacidad_commentarios, images
+                wilaya, commune, privacidad_informations, privacidad_commentarios, images,personName,  eventos,      option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre
             } = req.body;
 
             if (images.length > 3) {
@@ -73,9 +73,35 @@ const postCtrl = {
     },
 
 
+*/
 
+createPostPendiente: async (req, res) => {
 
+    try {
+        const { content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images } = req.body;
 
+        if (images.length === 0) {
+            return res.status(400).json({ msg: "Veuillez ajouter votre photo." });
+        }
+
+        const newPost = new Posts({
+            content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , estado: 'pendiente', images,
+            user: req.user._id,
+        });
+
+        await newPost.save();
+
+        res.json({
+            msg: "Article créé !",
+            newPost: {
+                ...newPost._doc,
+                user: req.user,
+            }
+        });
+    } catch (err) {
+        return res.status(500).json({ msg: err.message });
+    }
+},
 
 
 
@@ -186,7 +212,7 @@ const postCtrl = {
     },
 
  
-
+/*
     updatePost: async (req, res) => {
         try {
             const { content,      selectedOptions, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
@@ -229,6 +255,38 @@ const postCtrl = {
             return res.status(500).json({ msg: err.message });
         }
     },
+
+    */
+    updatePost: async (req, res) => {
+        try {
+            const { content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images} = req.body;
+            const post = await Posts.findOneAndUpdate({ _id: req.params.id }, {
+                content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option, capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images
+
+            }).populate("user likes", "avatar username")
+            .populate({
+                path: "comments",
+                populate: {
+                    path: "user likes",
+                    select: "-password"
+                }
+            })
+
+            res.json({
+                msg: "Updated Post!",
+                newPost: {
+                    ...post._doc,
+                    content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images
+                }
+            })
+        } catch (err) {
+            return res.status(500).json({ msg: err.message })
+        }
+    },
+
+
+
+
     likePost: async (req, res) => {
         try {
             const post = await Posts.find({ _id: req.params.id, likes: req.user._id })
