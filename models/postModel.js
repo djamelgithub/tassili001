@@ -100,14 +100,21 @@ const postSchema = new mongoose.Schema({
       maxlength: 300
     },
 
-
-
     autre: {
       type: String,
       required: false,
       maxlength: 300
     },
-
+    privacidad_informations: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
+    privacidad_commentarios: {
+      type: String,
+      required: false,
+      maxlength: 300
+    },
 
 
   },

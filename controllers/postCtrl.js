@@ -32,60 +32,19 @@ const postCtrl = {
         }
     },
 
-/*
-
-   createPostPendiente: async (req, res) => {
-        try {
-            const {
-                content,   specifications,selectedOptions, discripcion, price, dinero, negociable, nomprenom, telefono, email,
-         
-                wilaya, commune, privacidad_informations, privacidad_commentarios, images,personName,  eventos,      option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre
-            } = req.body;
-
-            if (images.length > 3) {
-                return res.status(400).json({ msg: "Pas plus de trois images autorisées." });
-            }
-
-            if (!images || images.length === 0) {
-                return res.status(400).json({ msg: 'Au moins une image est requise' });
-            }
-
-            const newPost = new Posts({
-                content,    specifications, selectedOptions,discripcion, price, dinero, negociable, nomprenom, telefono, email,
-         
-                wilaya, commune, privacidad_informations, privacidad_commentarios, images,
-                estado: 'pendiente',
-                user: req.user._id
-            });
-
-            await newPost.save();
-
-            res.json({
-                msg: "Votre publication a été créée et envoyée aux administrateurs en vue d'une validation postérieure.",
-                newPost: {
-                    ...newPost._doc,
-                    user: req.user
-                }
-            });
-        } catch (err) {
-            return res.status(500).json({ msg: err.message });
-        }
-    },
-
-
-*/
+ 
 
 createPostPendiente: async (req, res) => {
 
     try {
-        const { content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images } = req.body;
+        const {  content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre,privacidad_informations, privacidad_commentarios, images } = req.body;
 
         if (images.length === 0) {
             return res.status(400).json({ msg: "Veuillez ajouter votre photo." });
         }
 
         const newPost = new Posts({
-            content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , estado: 'pendiente', images,
+            content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre , estado: 'pendiente',privacidad_informations, privacidad_commentarios, images,
             user: req.user._id,
         });
 
@@ -210,58 +169,12 @@ createPostPendiente: async (req, res) => {
             return res.status(500).json({ msg: err.message });
         }
     },
-
  
-/*
     updatePost: async (req, res) => {
         try {
-            const { content,      selectedOptions, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
-                specifications,
-               
-                wilaya, commune, privacidad_informations, privacidad_commentarios,
-                images } = req.body;
-
-            const post = await Posts.findOneAndUpdate(
-                { _id: req.params.id },
-                {
-                    content,     selectedOptions, pecifications, discripcion, price, dinero, negociable, nomprenom, telefono, email,
-                specifications,
-               
-                wilaya, commune, privacidad_informations, privacidad_commentarios,
-                images
-                }
-            )
-                .populate("user likes", "avatar username  ")
-                .populate({
-                    path: "comments",
-                    populate: {
-                        path: "user likes",
-                        select: "-password",
-                    },
-                });
-
-            res.json({
-                msg: "Updated Post!",
-                newPost: {
-                    ...post._doc,
-                    content,   price ,    pecifications, discripcion,   dinero, negociable, nomprenom, telefono, email,
-                    specifications,
-                  
-                    wilaya, commune, privacidad_informations, privacidad_commentarios,
-                    images
-                },
-            });
-        } catch (err) {
-            return res.status(500).json({ msg: err.message });
-        }
-    },
-
-    */
-    updatePost: async (req, res) => {
-        try {
-            const { content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images} = req.body;
+            const {  content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre,privacidad_informations, privacidad_commentarios, images} = req.body;
             const post = await Posts.findOneAndUpdate({ _id: req.params.id }, {
-                content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option, capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images
+                content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre ,privacidad_informations, privacidad_commentarios, images
 
             }).populate("user likes", "avatar username")
             .populate({
@@ -276,7 +189,7 @@ createPostPendiente: async (req, res) => {
                 msg: "Updated Post!",
                 newPost: {
                     ...post._doc,
-                    content, direcion, wilaya, commune, personName, price, eventos, servicios, nombreapellido, telefono, email, option,  capacidad,invitados,restaurante, decoracion, musica, disponibilidad, parking, autre , images
+                    content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre,privacidad_informations, privacidad_commentarios, images
                 }
             })
         } catch (err) {
