@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
+  tipoTransaccion: {
+    type: String,
+    default: 'sala',
+    required: true,
+  },
   content: {
     type: String,
     required: true,
     maxlength: 50
   },
-  direcion: {
-    type: [String],
+  direccion: { // Corregido: 'direcion' a 'direccion'
+    type: String,
     required: false,
     maxlength: 50
   },
@@ -21,28 +26,33 @@ const postSchema = new mongoose.Schema({
     required: false,
     maxlength: 50
   },
-  personName: {
-    type: Array,
+  specifications: {
+    type: [String], // Corregido: Array de strings
     required: false,
-    maxlength: 250
+    maxlength: 50
   },
-
-  price: {
-    type: [Number],
-    required: true,
-  },
-
-  eventos: {
-    type: Array,
+  discripcion: { // Corregido: 'discripcion' a 'descripcion'
+    type: String,
     required: false,
-    maxlength: 250
+    maxlength: 400
   },
-
-  nombreapellido: {
+  pricesala: {
+    type: Number,
+    required: false,
+  },
+  dinero: {
     type: String,
     required: false,
     maxlength: 50
-
+  },
+  negociable: {
+    type: String,
+    required: false
+  },
+  nomprenom: {
+    type: String,
+    required: false,
+    maxlength: 50
   },
   telefono: {
     type: String,
@@ -51,83 +61,35 @@ const postSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    eventos: {
-      type: Array,
-      required: false,
-      maxlength: 50
-    },
-
-    option: {
-      type: String,
-      required: false,
-      maxlength: 50
-    },
-
-    capacidad: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    invitados: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    restaurante: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    decoracion: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-
-    musica: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    disponibilidad: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    parking: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-
-    autre: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    privacidad_informations: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-    privacidad_commentarios: {
-      type: String,
-      required: false,
-      maxlength: 300
-    },
-
-
+    required: false,
+    maxlength: 50
+  },
+  web: {
+    type: String,
+    required: false,
+    maxlength: 50
+  },
+  informacion: { // Corregido: 'privacidad_informations' a 'informacion'
+    type: String,
+    required: false
+  },
+  comentarios : { // Corregido: 'comentarios' a 'comentarios'
+    type: String,
+    required: false
   },
   images: {
-    type: Array,
+    type: Array, // Corregido: Array de strings
     required: true,
     maxlength: 7
-
   },
-  estado: { type: String, enum: ['pendiente', 'aprovado', 'eliminado'], default: 'pendiente' },
-  likes: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
-  comments: [{ type: mongoose.Types.ObjectId, ref: 'comment' }],
-  user: { type: mongoose.Types.ObjectId, ref: 'user' }
+  estado: {
+    type: String,
+    enum: ['pendiente', 'aprovado', 'eliminado'],
+    default: 'pendiente'
+  },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }], // Corregido: mongoose.Types.ObjectId a mongoose.Schema.Types.ObjectId
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comment' }], // Corregido: mongoose.Types.ObjectId a mongoose.Schema.Types.ObjectId
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' } // Corregido: mongoose.Types.ObjectId a mongoose.Schema.Types.ObjectId
 }, {
   timestamps: true,
 });

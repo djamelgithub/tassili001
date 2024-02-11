@@ -25,7 +25,7 @@ const servicioCtrl = {
         try {
             const {
                 content,   opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
-                wilaya, commune, privacidad_informations, privacidad_commentarios, images
+                wilaya, commune, privacidad_informations, comentarios, images
             } = req.body;
 
             if (images.length > 3) {
@@ -38,7 +38,7 @@ const servicioCtrl = {
 
             const newServicio = new Servicios({
                 content,  opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
-                wilaya, commune, privacidad_informations, privacidad_commentarios, images,
+                wilaya, commune, privacidad_informations, comentarios, images,
                 estado: 'pendiente',
                 user: req.user._id
             });
@@ -164,7 +164,7 @@ const servicioCtrl = {
         try {
             const { content,  opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
              
-                wilaya, commune, privacidad_informations, privacidad_commentarios,
+                wilaya, commune, privacidad_informations, comentarios,
                 images } = req.body;
 
             const servicio = await Servicios.findOneAndUpdate(
@@ -172,7 +172,7 @@ const servicioCtrl = {
                 {
                     content,  opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
                   
-                    wilaya, commune, privacidad_informations, privacidad_commentarios,
+                    wilaya, commune, privacidad_informations, comentarios,
                     images
                 }
             )
@@ -191,7 +191,7 @@ const servicioCtrl = {
                     ...servicio._doc,
                     content,   precioservicio, opcionesservicio,   discripcion, dinero, negociable, nomprenom, telefono, email,
                   
-                    wilaya, commune, privacidad_informations, privacidad_commentarios,
+                    wilaya, commune, privacidad_informations, comentarios,
                     images
                 },
             });

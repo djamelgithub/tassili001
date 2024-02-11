@@ -65,7 +65,7 @@ const servicioSchema = new mongoose.Schema({
     required: false
   },
   
-  privacidad_commentarios: {
+  comentarios: {
     type: String,
     required: false
   },
@@ -77,7 +77,8 @@ const servicioSchema = new mongoose.Schema({
 
   images: {
     type: Array,
-    required: true
+    required: true,
+    maxlength: 7
   },
 
   estado: {

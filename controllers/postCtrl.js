@@ -37,21 +37,20 @@ const postCtrl = {
 createPostPendiente: async (req, res) => {
 
     try {
-        const {  content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre,privacidad_informations, privacidad_commentarios, images } = req.body;
-
+        const {  content,direcion,wilaya,commune,specifications,discripcion,pricesala,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images } = req.body;
+        
         if (images.length === 0) {
             return res.status(400).json({ msg: "Veuillez ajouter votre photo." });
         }
 
         const newPost = new Posts({
-            content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre , estado: 'pendiente',privacidad_informations, privacidad_commentarios, images,
-            user: req.user._id,
+             estado: 'pendiente', content,direcion,wilaya,commune,specifications,discripcion,pricesala,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images,user: req.user._id,
         });
 
         await newPost.save();
 
         res.json({
-            msg: "Article créé !",
+            msg: "Votre publication a été créé avec succès et envoyé aux administrateurs pour approbation ultérieure !",
             newPost: {
                 ...newPost._doc,
                 user: req.user,
@@ -128,7 +127,7 @@ createPostPendiente: async (req, res) => {
             }
             
             if (minpriciosala && maxpriciosala) {
-                query.price = { $gte: minpriciosala, $lte: maxpriciosala };
+                query.pricesala = { $gte: minpriciosala, $lte: maxpriciosala };
             }
  
           
@@ -172,9 +171,9 @@ createPostPendiente: async (req, res) => {
  
     updatePost: async (req, res) => {
         try {
-            const {  content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre,privacidad_informations, privacidad_commentarios, images} = req.body;
+            const { content,direcion,wilaya,commune,specifications,discripcion,pricesala,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images} = req.body;
             const post = await Posts.findOneAndUpdate({ _id: req.params.id }, {
-                content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre ,privacidad_informations, privacidad_commentarios, images
+                content,direcion,wilaya,commune,specifications,discripcion,pricesala,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios ,
 
             }).populate("user likes", "avatar username")
             .populate({
@@ -189,7 +188,7 @@ createPostPendiente: async (req, res) => {
                 msg: "Updated Post!",
                 newPost: {
                     ...post._doc,
-                    content,direcion,wilaya,commune,personName,servicios, price,eventos,nombreapellido,telefono,email,option,capacidad,invitados,restaurante, decoracion, musica,disponibilidad,parking, autre,privacidad_informations, privacidad_commentarios, images
+                    content,direcion,wilaya,commune,specifications,discripcion,pricesala,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios ,images
                 }
             })
         } catch (err) {
