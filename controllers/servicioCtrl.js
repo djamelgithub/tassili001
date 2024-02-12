@@ -24,8 +24,7 @@ const servicioCtrl = {
     createServicioPendiente: async (req, res) => {
         try {
             const {
-                content,   opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
-                wilaya, commune, privacidad_informations, comentarios, images
+                content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images
             } = req.body;
 
             if (images.length > 3) {
@@ -37,9 +36,8 @@ const servicioCtrl = {
             }
 
             const newServicio = new Servicios({
-                content,  opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
-                wilaya, commune, privacidad_informations, comentarios, images,
-                estado: 'pendiente',
+                estado: 'pendiente',   content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images,
+                
                 user: req.user._id
             });
 
@@ -74,7 +72,7 @@ const servicioCtrl = {
                     });
         
                 res.json({
-                    msg: "Votre publication a été publiée avec succès.",
+                    msg: "Votre publication 'Service salle des fêtes' a été créée et envoyée aux administrateurs pour validation ultérieure. Dans tous les cas nous vous envoyons une notification !",
                     result: servicios.length,
                     servicios
                 });
@@ -102,19 +100,19 @@ const servicioCtrl = {
     },
     getServicios: async (req, res) => {
         try {
-            const {content,ventalocation, marca,modelo,  wilaya, commune, minprecioservicio, maxprecioservicio, optionservicios } = req.query;
+            const {optionservicio,ventalocation, marca,modelo,  wilaya, commune, minprecioservicio, maxprecioservicio   } = req.query;
     
             let query = { estado: 'aprovado' };
     
             if (ventalocation) {
                 query.salaservicio = ventalocation;
             }
-            if (content) {
-                query.content = content;
+            if (optionservicio) {
+                query.optionservicio = optionservicio;
             }
     
             if (minprecioservicio && maxprecioservicio) {
-                query.precioservicio = { $gte: minprecioservicio, $lte: maxprecioservicio };
+                query.priceservicio = { $gte: minprecioservicio, $lte: maxprecioservicio };
             }
     
             if (wilaya) {
@@ -131,10 +129,7 @@ const servicioCtrl = {
             if (modelo) { 
                 query.modelo = modelo;
             }
-            // Agregar la condición para filtrar por servicios seleccionados
-            if (optionservicios) { 
-                query.optionservicios = optionservicios;
-            }
+          
           
           
             const features = new APIfeatures(Servicios.find(query), req.query).paginating();
@@ -162,18 +157,12 @@ const servicioCtrl = {
     
     updateServicio: async (req, res) => {
         try {
-            const { content,  opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
-             
-                wilaya, commune, privacidad_informations, comentarios,
-                images } = req.body;
+            const {   content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images } = req.body;
 
             const servicio = await Servicios.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    content,  opcionesservicio, discripcion, precioservicio, dinero, negociable, nomprenom, telefono, email,
-                  
-                    wilaya, commune, privacidad_informations, comentarios,
-                    images
+                    content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images
                 }
             )
                 .populate("user likes", "avatar username  ")
@@ -185,16 +174,34 @@ const servicioCtrl = {
                     },
                 });
 
-            res.json({
-                msg: "Updated Servicio!",
-                newServicio: {
-                    ...servicio._doc,
-                    content,   precioservicio, opcionesservicio,   discripcion, dinero, negociable, nomprenom, telefono, email,
-                  
-                    wilaya, commune, privacidad_informations, comentarios,
-                    images
-                },
-            });
+                if (servicio) {
+                    res.json({
+                        msg: "Updated Servicio!",
+                        newServicio: {
+                            ...servicio._doc,
+                            content,
+                            optionservicio,
+                            direcion,
+                            wilaya,
+                            commune,
+                            discripcion,
+                            priceservicio,
+                            dinero,
+                            negociable,
+                            nomprenom,
+                            telefono,
+                            email,
+                            web,
+                            informacion,
+                            comentarios,
+                            images
+                        },
+                    });
+                } else {
+                    // Manejar el caso en el que servicio es null
+                    res.status(404).json({ msg: "Servicio not found" });
+                }
+                
         } catch (err) {
             return res.status(500).json({ msg: err.message });
         }

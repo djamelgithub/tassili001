@@ -47,10 +47,10 @@ createPostPendiente: async (req, res) => {
              estado: 'pendiente', content,direcion,wilaya,commune,specifications,discripcion,pricesala,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images,user: req.user._id,
         });
 
-        await newPost.save();
+        await newPost.save();  
 
         res.json({
-            msg: "Votre publication a été créé avec succès et envoyé aux administrateurs pour approbation ultérieure !",
+            msg: "Votre publication 'Salle des fêtes' a été créée et envoyée aux administrateurs pour validation ultérieure. Dans tous les cas nous vous envoyons une notification !",
             newPost: {
                 ...newPost._doc,
                 user: req.user,

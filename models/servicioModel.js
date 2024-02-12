@@ -1,99 +1,100 @@
 const mongoose = require('mongoose');
 
 const servicioSchema = new mongoose.Schema({
+  tipoTransaccion: {
+    type: String,
+    default: 'servicio',
+    required: true,
+  },
+
   content: {
     type: String,
+    required: true,
+    maxlength: 50
+  },
+
+  optionservicio: {
+    type: String, // Corregido: Array de strings
     required: false,
+    maxlength: 50
+  },
+
+  direccion: { // Corregido: 'direcion' a 'direccion'
+    type: String,
+    required: false,
+    maxlength: 50
+  },
+  wilaya: {
+    type: String,
+    required: false,
+    maxlength: 50
+  },
+  commune: {
+    type: String,
+    required: false,
+    maxlength: 50
   },
   
-  
-  opcionesservicio: {
+  discripcion: { // Corregido: 'discripcion' a 'descripcion'
+    type: String,
+    required: false,
+    maxlength: 400
+  },
+  priceservicio: {
     type: String,
     required: false,
   },
-
-  discripcion: {
-    type: String,
-    required: false
-  },
-
-  precioservicio: {
-    type: Number,
-    required: false
-  },
-  
   dinero: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-
   negociable: {
     type: String,
     required: false
   },
-
-  tipoTransaccion: {
-    type: String,
-    default: 'servicio', // Puedes establecer el valor predeterminado aquí
-    required: true,
-  },
-  
-
-  wilaya: {
-    type: String,
-    required: false
-  },
-
-  commune: {
-    type: String,
-    required: false
-  },
- 
-  
   nomprenom: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-
   telefono: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-
   email: {
     type: String,
-    required: false
+    required: false,
+    maxlength: 50
   },
-  
-  comentarios: {
+  web: {
+    type: String,
+    required: false,
+    maxlength: 50
+  },
+  informacion: { // Corregido: 'privacidad_informations' a 'informacion'
     type: String,
     required: false
   },
-
-  privacidad_informations: {
+  comentarios : { // Corregido: 'comentarios' a 'comentarios'
     type: String,
     required: false
   },
-
   images: {
-    type: Array,
+    type: Array, // Corregido: Array de strings
     required: true,
     maxlength: 7
   },
-
   estado: {
     type: String,
-    enum: ['pendiente', 'aprovado', 'rechazado'],
+    enum: ['pendiente', 'aprovado', 'eliminado'],
     default: 'pendiente'
   },
- 
-  vistas: { type: Number, default: 0 },
-
-  likes: [{ type: mongoose.Types.ObjectId, ref: 'user' }],
-  comments: [{ type: mongoose.Types.ObjectId, ref: 'comment' }],
-  user: { type: mongoose.Types.ObjectId, ref: 'user' }
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }], // Corregido: mongoose.Types.ObjectId a mongoose.Schema.Types.ObjectId
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'comment' }], // Corregido: mongoose.Types.ObjectId a mongoose.Schema.Types.ObjectId
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' } // Corregido: mongoose.Types.ObjectId a mongoose.Schema.Types.ObjectId
 }, {
-  timestamps: true
+  timestamps: true,
 });
-
 module.exports = mongoose.model('servicio', servicioSchema);
