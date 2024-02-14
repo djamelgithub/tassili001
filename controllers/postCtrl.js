@@ -23,8 +23,8 @@ const postCtrl = {
 
     searchPost: async (req, res) => {
         try {
-            const posts = await Posts.find({content: {$regex: req.query.username}})
-            .limit(10).select("fullname username avatar")
+            const posts = await Posts.find({ content: { $regex: regex } })
+            .limit(10).select("content pricesala telefono")
             
             res.json({posts})
         } catch (err) {
