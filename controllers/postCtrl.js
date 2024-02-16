@@ -24,7 +24,7 @@ const postCtrl = {
     searchPost: async (req, res) => {
         try {
             const posts = await Posts.find({ content: { $regex: regex } })
-            .limit(10).select("content pricesala telefono")
+            .limit(10).select("posts" ,"content pricesala telefono")
             
             res.json({posts})
         } catch (err) {
