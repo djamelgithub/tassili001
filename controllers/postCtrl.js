@@ -19,20 +19,45 @@ class APIfeatures {
 
 const postCtrl = {
  
-
-
-    searchPost: async (req, res) => {
+ 
+  /*  searchPosts: async (req, res) => {
         try {
-            const posts = await Posts.find({ content: { $regex: regex } })
-            .limit(10).select("posts" ,"content pricesala telefono")
-            
-            res.json({posts})
+            const { content } = req.query;
+            console.log('Query parameters:', req.query); // Verifica los parámetros de la consulta
+            console.log('Content:', content); // Verifica el valor de content
+    
+            let query = { estado: 'aprovado' };
+    
+            if (content) {
+                query.content = content;
+            }
+            console.log('Query:', query); // Verifica la consulta construida
+    
+            const features = new APIfeatures(Posts.find(query), req.query).paginating();
+    
+            const posts = await features.query
+                .sort('-createdAt')
+                .populate("user likes", "avatar username followers")
+                .populate({
+                    path: "comments",
+                    populate: {
+                        path: "user likes",
+                        select: "-password"
+                    }
+                });
+            console.log('Filtered posts:', posts); // Verifica los posts filtrados
+    
+            res.json({
+                msg: 'Success!',
+                result: posts.length,
+                posts
+            });
         } catch (err) {
-            return res.status(500).json({msg: err.message})
+            console.error('Error:', err); // Maneja los errores y registra el mensaje de error
+            return res.status(500).json({ msg: err.message });
         }
     },
-
- 
+    */
 
 createPostPendiente: async (req, res) => {
 

@@ -2,8 +2,8 @@ const router = require('express').Router();
 const postCtrl = require('../controllers/postCtrl');
 const auth = require('../middleware/auth');
 
-router.get('/posts',   postCtrl.getPosts);
-router.get('/search',  postCtrl.searchPost)
+ router.get('/posts',   postCtrl.getPosts);
+//router.get('/posts',  postCtrl.searchPosts)
 router.post('/crearpostpendiente', auth, postCtrl.createPostPendiente);
 
 router.get('/getpostspendientes', auth, postCtrl.getPostsPendientesss);

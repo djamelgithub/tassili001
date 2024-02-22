@@ -1,7 +1,10 @@
 const router = require('express').Router()
  
+//const   authCtrl  = require('../controllers/authCtrl')
+ 
 const userCtrl = require('../controllers/userCtrl')
 const auth = require("../middleware/auth")
+ 
  
 router.get('/users', auth, userCtrl.getUsers)
 
@@ -9,8 +12,8 @@ router.get('/users', auth, userCtrl.getUsers)
 
 router.get('/user/:id', auth, userCtrl.getUser)
  
-router.patch('/user', auth, userCtrl.updateUser)
-
+router.patch('/user/:id', auth, userCtrl.updateUser)
+router.patch('/user/:id', auth, userCtrl.updateUseradmin)
 router.patch('/user/:id/follow', auth, userCtrl.follow)
 router.patch('/user/:id/unfollow', auth, userCtrl.unfollow)
 
@@ -30,5 +33,8 @@ router.patch('/user/:id/bloqueopost', auth, userCtrl.Bloqueadopost);
 
 router.patch('/user/:id/sinbloqueouser', auth, userCtrl.bloquearelusuario);
 router.patch('/user/:id/bloqueouser', auth, userCtrl.dejarelbloqueo);
+ 
+ 
+
 
 module.exports = router

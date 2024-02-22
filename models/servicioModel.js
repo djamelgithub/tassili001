@@ -7,17 +7,13 @@ const servicioSchema = new mongoose.Schema({
     required: true,
   },
 
-  content: {
+  contentservicio: {
     type: String,
     required: true,
     maxlength: 50
   },
 
-  optionservicio: {
-    type: String, // Corregido: Array de strings
-    required: false,
-    maxlength: 50
-  },
+ 
 
   direccion: { // Corregido: 'direcion' a 'direccion'
     type: String,

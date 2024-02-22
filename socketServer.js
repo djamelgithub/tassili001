@@ -37,7 +37,14 @@ const SocketServer = (socket) => {
 
         users = users.filter(user => user.socketId !== socket.id)
     })
-
+  //
+  
+  
+  
+  
+  
+  
+  //socket.emit('likePost', newPost)
 
     // Likes
     socket.on('likePost', newPost => {

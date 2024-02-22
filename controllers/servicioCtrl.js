@@ -24,7 +24,7 @@ const servicioCtrl = {
     createServicioPendiente: async (req, res) => {
         try {
             const {
-                content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images
+                contentservicio, direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images
             } = req.body;
 
             if (images.length > 3) {
@@ -36,7 +36,7 @@ const servicioCtrl = {
             }
 
             const newServicio = new Servicios({
-                estado: 'pendiente',   content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images,
+                estado: 'pendiente',   contentservicio, direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images,
                 
                 user: req.user._id
             });
@@ -100,16 +100,17 @@ const servicioCtrl = {
     },
     getServicios: async (req, res) => {
         try {
-            const {optionservicio,ventalocation, marca,modelo,  wilaya, commune, minprecioservicio, maxprecioservicio   } = req.query;
+            const {ventalocation,contentservicio,   marca,modelo,  wilaya, commune, minprecioservicio, maxprecioservicio   } = req.query;
     
             let query = { estado: 'aprovado' };
     
             if (ventalocation) {
                 query.salaservicio = ventalocation;
             }
-            if (optionservicio) {
-                query.optionservicio = optionservicio;
+             if (contentservicio) {
+                query.contentservicio = contentservicio;
             }
+            
     
             if (minprecioservicio && maxprecioservicio) {
                 query.priceservicio = { $gte: minprecioservicio, $lte: maxprecioservicio };
@@ -157,12 +158,12 @@ const servicioCtrl = {
     
     updateServicio: async (req, res) => {
         try {
-            const {   content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images } = req.body;
+            const {   contentservicio, direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios, images } = req.body;
 
             const servicio = await Servicios.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    content,optionservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images
+                    contentservicio,direcion,wilaya,commune,discripcion,priceservicio,dinero,negociable,nomprenom,telefono,email,web,informacion,comentarios , images
                 }
             )
                 .populate("user likes", "avatar username  ")
@@ -179,9 +180,8 @@ const servicioCtrl = {
                         msg: "Updated Servicio!",
                         newServicio: {
                             ...servicio._doc,
-                            content,
-                            optionservicio,
-                            direcion,
+                            contentservicio,
+                              direcion,
                             wilaya,
                             commune,
                             discripcion,
