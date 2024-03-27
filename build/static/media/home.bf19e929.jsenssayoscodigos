@@ -1,0 +1,19 @@
+import React from 'react'
+import { prova } from '../redux/actions/postAction'
+
+const Home = () => {
+
+    const aaa = 554
+  
+
+    return (
+        <div>
+     {aaa === 554 && (  <div><h5>  {prova()}</h5></div>)}  
+     
+        
+        </div>
+
+    )
+}
+
+export default Home
