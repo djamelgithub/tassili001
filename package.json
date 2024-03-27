@@ -28,7 +28,7 @@
     "i18next-http-backend": "^2.2.1",
     "i18next-http-middleware": "^3.3.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.13",
+    "mongoose": "^5.13.22",
     "nodemailer": "^6.9.9",
     "peer": "^0.6.1",
     "react-i18next": "^13.1.2",
