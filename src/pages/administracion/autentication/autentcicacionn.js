@@ -17,9 +17,7 @@ const Autentcicacionn = () => {
               title="Authentification et Activation Compte"
               menuVariant="dark"
             >
-              <NavDropdown.Item href="/pages/administracion/autentication/autenticacionsms">Authentification SMS</NavDropdown.Item>
-              <NavDropdown.Item href="/pages/administracion/autentication/autenticacionemail"> MAuthentification par courrie</NavDropdown.Item>
-           <NavDropdown.Item href="/pages/administracion/autentication/activarcuenta">   Activation de compte </NavDropdown.Item>
+              <NavDropdown.Item href="/pages/administracion/autentication/activarcuenta">   Activation de compte </NavDropdown.Item>
            <NavDropdown.Item href="/pages/administracion/autentication/contadorr">   Compteur </NavDropdown.Item>
              
             </NavDropdown>

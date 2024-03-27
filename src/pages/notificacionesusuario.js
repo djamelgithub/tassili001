@@ -8,8 +8,7 @@ import { logout } from '../redux/actions/authAction';
 
  
 import NotifyModal from '../components/NotifyModal';
-//import Avatar from '../components/Avatar'         <Avatar src={auth.user.avatar} size="medium-avatar" />      </div>
-let scroll = 0;
+ let scroll = 0;
 const Notificacionesusuario = () => {
     const { auth,notify } = useSelector((state) => state);
     const isAuthenticated = !!auth.token;

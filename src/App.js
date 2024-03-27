@@ -62,7 +62,7 @@ import Mensajess from './pages/administracion/administrationmensajes/mensajess'
 import Enviarmensaje from './pages/administracion/administrationmensajes/enviarmensaje'
 import RecebirMensajes from './components/administracionMensajes/RecebirMensajes'
 import Autentcicacionn from './pages/administracion/autentication/autentcicacionn'
-import Autenticacionemail from './pages/administracion/autentication/autenticacionemail';
+ 
 import Autenticacionsms from './pages/administracion/autentication/autenticacionsms'
 import Activarcuenta from './pages/administracion/autentication/activarcuenta'
 import Contadorr from './pages/administracion/autentication/contadorr'
@@ -88,9 +88,7 @@ function App() {
 
 
 
-  //<Route exact path="/pages/twiliosmsss" component={Tttwliosms} />
-  //<Route exact path="/pages/notificacionesusuario" component={Notificacionesusuario} />
-
+ 
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin')
@@ -190,7 +188,7 @@ function App() {
 
           <Route exact path="/pages/administracion/autentication/activarcuenta" component={Activarcuenta} />
           <Route exact path="/pages/administracion/autentication/autenticationn" component={Autentcicacionn} />
-          <Route exact path="/pages/administracion/autentication/autenticacionemail" component={Autenticacionemail} />
+     
           <Route exact path="/pages/administracion/autentication/autenticacionsms" component={Autenticacionsms} />
           <Route exact path="/pages/administracion/autentication/contadorr" component={Contadorr} />
 
