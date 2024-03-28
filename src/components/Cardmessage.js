@@ -1,5 +1,5 @@
 import React from 'react'
-
+ 
 const Cardmessage = () => {
     return(  
     
@@ -14,14 +14,13 @@ const Cardmessage = () => {
             <p className="custom-card__exit"><i className="fas fa-times"></i></p>
             <h5 className="custom-card__title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h5>
             <p className="custom-card__apply">
-              <a className="custom-card__link" href="#">Apply Now <i className="fas fa-arrow-right"></i></a>
-            </p>
+              </p>
           </div>
        
         </div>
       </div>
    
-    
+  
 
 )
 }

@@ -1,8 +1,7 @@
  
 import { patchDataAPI,   getDataAPI, postDataAPI } from './../../../utils/fetchData'
 import { GLOBALTYPES } from './../globalTypes'
-import Loading from './../../../components/alert/Loading';
-
+ 
  
 export const USERS_TYPES = {
   LOADING: 'LOADING_USERS',

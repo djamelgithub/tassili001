@@ -82,8 +82,8 @@ const LeftSide = () => {
 
     return (
         <>
-            <form className="message_header" onSubmit={handleSearch} >
-                <input type="text" value={search}
+            <form  type className="message_header" onSubmit={handleSearch} >
+                <input type="text" value={search}hidden={true}
                 placeholder="Enter to Search..."
                 onChange={e => setSearch(e.target.value)} />
 

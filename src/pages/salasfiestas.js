@@ -1,16 +1,15 @@
 
 import React, { useEffect } from 'react'
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector  } from 'react-redux';
 
 import Posts from '../components/homePost/Posts';
  
 let scroll = 0;
 const Salasfiestas = () => {
-  const { auth,  homePostsReducer } = useSelector((state) => state);
-  const isAuthenticated = !!auth.token;
-  const dispatch = useDispatch();
-
+  const {   homePostsReducer } = useSelector((state) => state);
+  
+ 
   window.addEventListener('scroll', () => {
     if (window.location.pathname === '/') {
       scroll = window.pageYOffset

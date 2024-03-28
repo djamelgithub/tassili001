@@ -54,7 +54,7 @@ import Pagos from './pages/administracion/Pagos'
 
 import Statusmodalsearch from './components/statusmodelll/Statusmodalsearch'
 import StatusModalsalle from './components/statusmodelll/StatusModalsalle'
-import StatusadminModal from './components/statusmodelll/StatusadminModal'
+//import StatusadminModal from './components/statusmodelll/StatusadminModal' {statusadmin && <StatusadminModal />}
 import Dashboard from './pages/user/dashboard'
 
 import { getmessageadmin } from './redux/actions/messagesadminAction'
@@ -158,7 +158,7 @@ function App() {
           {statussearch && <Statusmodalsearch />}
           {status && <StatusModalsalle />}
           {statusservicio && <Statusmodalservicio />}
-          {statusadmin && <StatusadminModal />}
+          
           {auth.token && <SocketClient />}
           {call && <CallModal />}
 

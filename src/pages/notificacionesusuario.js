@@ -164,11 +164,11 @@ const Notificacionesusuario = () => {
 
 
                                         <li className="sidebar-dropdown">
-                                            <a >
+                                            <p>
                                                 <i className="fa fa-tachometer-alt"></i>
                                                 <span>Annonces</span>
                                                 <span className="badge badge-pill badge-danger">{notify.data.length}</span>
-                                            </a>
+                                            </p>
                                             <div className="sidebar-submenu">
                                                 <ul>
                                                     <li>

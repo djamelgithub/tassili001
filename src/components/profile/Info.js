@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Avatar from '../Avatar'
 import EditProfile from './EditProfile'
- 
+import { Link } from 'react-router-dom'; // Importa el componente Link
 import Followers from './Followers'
 import Following from './Following'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
@@ -66,9 +66,9 @@ const Info = ({id, auth, profile, dispatch}) => {
 
                                <p className="m-0">{user.address}</p>
                             <h6 className="m-0">{user.email}</h6>
-                            <a href={user.website} target="_blank" rel="noreferrer">
+                            <Link to={user.website} target="_blank" rel="noreferrer">
                                 {user.website}
-                            </a>
+                            </Link>
                             <p>{user.story}</p>
                         </div>
 

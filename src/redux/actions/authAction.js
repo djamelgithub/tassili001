@@ -2,7 +2,7 @@ import { GLOBALTYPES } from './globalTypes'
 import { postDataAPI } from '../../utils/fetchData'
 import valid from '../../utils/valid'
 import axios from 'axios'
-//import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Importa el componente Link
 
 export const login = (data) => async (dispatch) => {
     try {
@@ -94,11 +94,14 @@ export const register = (data) => async (dispatch) => {
 };
  
 
+ 
+
 export const logout = () => async (dispatch) => {
     try {
         localStorage.removeItem('firstLogin')
         await postDataAPI('logout')
-        window.location.href = "/login"
+       
+        return <Link to="/login" />;
     } catch (err) {
         dispatch({ 
             type: GLOBALTYPES.ALERT, 

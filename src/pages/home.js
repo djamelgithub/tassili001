@@ -65,7 +65,7 @@ const Home = () => {
         return (
             <div>
                 <div className="page-wrapper chiller-theme toggled">
-                    <a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
+                    <a id="show-sidebar" className="btn btn-sm btn-dark">
                         <i className="fas fa-bars" />
                     </a>
                     <nav id="sidebar" className="sidebar-wrapper">
@@ -250,11 +250,11 @@ const Home = () => {
 
 
                                     <li className="sidebar-dropdown">
-                                        <a href="#">
+                                        <>
                                             <i className="fa fa-user-alt" />
                                             <span>Profil</span>
                                             <span className="badge badge-pill badge-warning"></span>
-                                        </a>
+                                        </>
                                         <div className="sidebar-submenu">
                                             <ul>
                                                 <li className=" ">
@@ -274,11 +274,11 @@ const Home = () => {
                                         </div>
                                     </li>
                                     <li className="sidebar-dropdown">
-                                        <a href="#">
+                                        <>
                                             <i className="fa fa-tachometer-alt" />
                                             <span>Annonces</span>
                                             <span className="badge badge-pill badge-warning"></span>
-                                        </a>
+                                        </>
                                         <div className="sidebar-submenu">
                                             <ul>
                                                 <li className=" ">
@@ -297,11 +297,11 @@ const Home = () => {
                                             </ul>
                                         </div>
                                         <li className="sidebar-dropdown">
-                                            <a href="#">
+                                            <>
                                                 <i className="fa fa-tachometer-alt" />
                                                 <span>Administration</span>
                                                 <span className="badge badge-pill badge-warning"></span>
-                                            </a>
+                                            </>
                                             <div className="sidebar-submenu">
                                                 <ul>
                                                     <li className=" ">
@@ -328,11 +328,11 @@ const Home = () => {
                                         </li>
 
                                         <li className="sidebar-dropdown">
-                                            <a href="#">
+                                            <>
                                                 <i className="fa fa-tachometer-alt" />
                                                 <span>Authentification</span>
                                                 <span className="badge badge-pill badge-warning"></span>
-                                            </a>
+                                            </>
                                             <div className="sidebar-submenu">
                                                 <ul>
                                                     <li className=" ">
@@ -412,7 +412,7 @@ const Home = () => {
         return (
             <div>
                 <div className="page-wrapper chiller-theme toggled">
-                    <a id="show-sidebar" className="btn btn-sm btn-dark" href="#">
+                    <a id="show-sidebar" className="btn btn-sm btn-dark"  >
                         <i className="fas fa-bars" />
                     </a>
                     <nav id="sidebar" className="sidebar-wrapper">
@@ -524,11 +524,11 @@ const Home = () => {
                                 </li>
 
                                     <li className="sidebar-dropdown">
-                                        <a href="#">
+                                        <>
                                             <i className="fa fa-user-alt" />
                                             <span>Profil</span>
                                             <span className="badge badge-pill badge-warning"></span>
-                                        </a>
+                                        </>
                                         <div className="sidebar-submenu">
                                             <ul>
                                                 <li className=" ">
@@ -548,11 +548,11 @@ const Home = () => {
                                         </div>
                                     </li>
                                     <li className="sidebar-dropdown">
-                                        <a href="#">
+                                        <>
                                             <i className="fa fa-tachometer-alt" />
                                             <span>Annonces</span>
                                             <span className="badge badge-pill badge-warning"></span>
-                                        </a>
+                                        </>
                                         <div className="sidebar-submenu">
                                             <ul>
                                                 <li className=" ">
@@ -571,11 +571,11 @@ const Home = () => {
                                             </ul>
                                         </div>
                                         <li className="sidebar-dropdown">
-                                            <a href="#">
+                                            <>
                                                 <i className="fa fa-tachometer-alt" />
                                                 <span>Administration</span>
                                                 <span className="badge badge-pill badge-warning"></span>
-                                            </a>
+                                            </>
                                             <div className="sidebar-submenu">
                                                 <ul>
                                                     <li className=" ">

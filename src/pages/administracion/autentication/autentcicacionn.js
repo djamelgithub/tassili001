@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
- 
+import { Link } from 'react-router-dom';  
 
 const Autentcicacionn = () => {
   return (
@@ -17,9 +17,15 @@ const Autentcicacionn = () => {
               title="Authentification et Activation Compte"
               menuVariant="dark"
             >
-              <NavDropdown.Item href="/pages/administracion/autentication/activarcuenta">   Activation de compte </NavDropdown.Item>
-           <NavDropdown.Item href="/pages/administracion/autentication/contadorr">   Compteur </NavDropdown.Item>
-             
+            
+
+<NavDropdown.Item as={Link} to="/pages/administracion/autentication/activarcuenta">
+  Activation de compte
+</NavDropdown.Item>
+<NavDropdown.Item as={Link} to="/pages/administracion/autentication/contadorr">
+  Compteur
+</NavDropdown.Item>
+
             </NavDropdown>
           </Nav>
 

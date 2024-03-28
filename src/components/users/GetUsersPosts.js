@@ -7,7 +7,6 @@ import { USERS_TYPES } from '../../redux/actions/users/usersAction';
 
 import { format } from 'date-fns';
 
-import UserCard from '../UserCard';
  
 
 
@@ -16,10 +15,9 @@ const GetUsersPosts = () => {
   const { usersReducer, auth } = useSelector(state => state);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [filteredUsers, setFilteredUsers] = useState([]);
-
+  
   const dispatch = useDispatch();
-  const currentDateString = new Date().toISOString();
+ 
   const [load, setLoad] = useState(false);
 
   const handleLoadMore = async () => {
