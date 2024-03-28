@@ -42,9 +42,9 @@ const Mensajess=() =>{
               menuVariant="dark"
             >
  
-              <NavDropdown.Item href="#action/3.2"> Messages Envoyés</NavDropdown.Item>
-           <NavDropdown.Item href="#"> <EnviarMensaje/>  </NavDropdown.Item>
-             
+              <NavDropdown.Item  > Messages Envoyés</NavDropdown.Item>
+           <NavDropdown.Item  > <EnviarMensaje/>  </NavDropdown.Item>
+            
             </NavDropdown>
           </Nav>
 
